@@ -136,6 +136,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FDC2F38A20B2D75600372E08 /* Build configuration list for PBXNativeTarget "Trackr" */;
 			buildPhases = (
+				FDC2F39920B2E64600372E08 /* Run Script: SwiftFormat */,
 				FDC2F35E20B2D75400372E08 /* Sources */,
 				FDC2F35F20B2D75400372E08 /* Frameworks */,
 				FDC2F36020B2D75400372E08 /* Resources */,
@@ -272,6 +273,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		FDC2F39920B2E64600372E08 /* Run Script: SwiftFormat */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script: SwiftFormat";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "$SRCROOT/scripts/run_swiftformat.sh $SRCROOT";
 		};
 /* End PBXShellScriptBuildPhase section */
 

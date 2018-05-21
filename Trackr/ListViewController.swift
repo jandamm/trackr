@@ -13,7 +13,7 @@ class ListViewController: UIViewController {
 }
 
 extension ListViewController: UITableViewDataSource {
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
 		return data.count
 	}
 
