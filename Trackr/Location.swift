@@ -13,3 +13,9 @@ struct Location {
 	let date: Date
 	let location: CLLocationCoordinate2D
 }
+
+extension Location: CustomStringConvertible {
+	var description: String {
+		return "\(location.longitude) \(location.latitude)"
+	}
+}
