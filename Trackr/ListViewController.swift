@@ -17,21 +17,11 @@ class ListViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		let c = CLLocationCoordinate2D(latitude: 199, longitude: 22)
-		let l = Location(date: Date(), location: c)
 		do {
-			try SQLiteWrapper.add(l)
+			data = try SQLiteWrapper.getLocations()
+			tableView.reloadData()
 		} catch {
 			print(error)
-		}
-
-		DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-			do {
-				self.data = try SQLiteWrapper.getLocations()
-				self.tableView.reloadData()
-			} catch {
-				print(error)
-			}
 		}
 	}
 }
