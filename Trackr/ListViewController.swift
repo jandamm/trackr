@@ -6,10 +6,34 @@
 //  Copyright © 2018 Jan Dammshäuser. All rights reserved.
 //
 
+import CoreLocation
 import UIKit
 
 class ListViewController: UIViewController {
-	let data: [String] = ["arst"]
+	var data: [Location] = []
+
+	@IBOutlet private var tableView: UITableView!
+
+	override func viewDidLoad() {
+		super.viewDidLoad()
+
+		let c = CLLocationCoordinate2D(latitude: 199, longitude: 22)
+		let l = Location(date: Date(), location: c)
+		do {
+			try SQLiteWrapper.add(l)
+		} catch {
+			print(error)
+		}
+
+		DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+			do {
+				self.data = try SQLiteWrapper.getLocations()
+				self.tableView.reloadData()
+			} catch {
+				print(error)
+			}
+		}
+	}
 }
 
 extension ListViewController: UITableViewDataSource {
@@ -19,7 +43,7 @@ extension ListViewController: UITableViewDataSource {
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "List.Cell", for: indexPath)
-		cell.textLabel?.text = data[indexPath.row]
+		cell.textLabel?.text = String(describing: data[indexPath.row])
 		return cell
 	}
 }
