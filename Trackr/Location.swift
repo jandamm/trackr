@@ -12,10 +12,29 @@ import Foundation
 struct Location {
 	let date: Date
 	let location: CLLocationCoordinate2D
+	let altitude: Double
 }
 
 extension Location: CustomStringConvertible {
 	var description: String {
-		return "\(location.longitude) \(location.latitude)"
+		let dateString = dateFormatter.string(from: date)
+		return "\(dateString): \(location.longitude) - \(location.latitude)"
 	}
 }
+
+extension Location: Comparable {
+	static func < (lhs: Location, rhs: Location) -> Bool {
+		return lhs.date < rhs.date
+	}
+
+	static func == (lhs: Location, rhs: Location) -> Bool {
+		return lhs.date == rhs.date
+	}
+}
+
+private let dateFormatter = { () -> DateFormatter in
+	let dateFormatter = DateFormatter()
+	dateFormatter.dateStyle = .short
+	dateFormatter.timeStyle = .short
+	return dateFormatter
+}()
