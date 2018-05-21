@@ -48,3 +48,14 @@ class SQLiteWrapper {
 		}
 	}
 }
+
+func addColumn<T: Value>(column: Expression<T?>, to database: Connection, in table: Table) throws {
+	do {
+		try database.run(table.addColumn(column))
+	} catch {
+		guard case let SQLite.Result.error(message, code, _) = error,
+			code == 1
+		else { throw error }
+		print(message)
+	}
+}
