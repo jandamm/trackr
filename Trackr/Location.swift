@@ -18,7 +18,9 @@ struct Location {
 extension Location: CustomStringConvertible {
 	var description: String {
 		let dateString = dateFormatter.string(from: date)
-		return "\(dateString): \(location.longitude) - \(location.latitude)"
+		let lon = numberFormatter.string(from: location.longitude as NSNumber)
+		let lat = numberFormatter.string(from: location.latitude as NSNumber)
+		return "\(dateString): \(lon ?? "nil") - \(lat ?? "")"
 	}
 }
 
@@ -37,4 +39,10 @@ private let dateFormatter = { () -> DateFormatter in
 	dateFormatter.dateStyle = .short
 	dateFormatter.timeStyle = .short
 	return dateFormatter
+}()
+
+private let numberFormatter = { () -> NumberFormatter in
+	let numberFormatter = NumberFormatter()
+	numberFormatter.maximumFractionDigits = 5
+	return numberFormatter
 }()
