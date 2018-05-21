@@ -18,16 +18,20 @@ class ListViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		observer = NotificationCenter.default.addObserver(forName: NSNotification.Name("Update"), object: nil, queue: .main, using: { [weak tableView] _ in
-			tableView?.reloadData()
+		observer = NotificationCenter.default.addObserver(forName: NSNotification.Name("Update"), object: nil, queue: .main, using: { [unowned self] _ in
+			try? self.reloadData()
 		})
 
 		do {
-			data = try SQLiteWrapper.getLocations().sorted(by: >)
-			tableView.reloadData()
+			try reloadData()
 		} catch {
 			print(error)
 		}
+	}
+
+	func reloadData() throws {
+		data = try SQLiteWrapper.getLocations().sorted(by: >)
+		tableView.reloadData()
 	}
 }
 
