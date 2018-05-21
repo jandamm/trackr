@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FDC2F36620B2D75400372E08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC2F36520B2D75400372E08 /* AppDelegate.swift */; };
-		FDC2F36820B2D75400372E08 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC2F36720B2D75400372E08 /* ViewController.swift */; };
+		FDC2F36820B2D75400372E08 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC2F36720B2D75400372E08 /* ListViewController.swift */; };
 		FDC2F36B20B2D75400372E08 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDC2F36920B2D75400372E08 /* Main.storyboard */; };
 		FDC2F36D20B2D75600372E08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDC2F36C20B2D75600372E08 /* Assets.xcassets */; };
 		FDC2F37020B2D75600372E08 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDC2F36E20B2D75600372E08 /* LaunchScreen.storyboard */; };
@@ -36,7 +36,7 @@
 /* Begin PBXFileReference section */
 		FDC2F36220B2D75400372E08 /* Trackr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trackr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDC2F36520B2D75400372E08 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FDC2F36720B2D75400372E08 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FDC2F36720B2D75400372E08 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		FDC2F36A20B2D75400372E08 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FDC2F36C20B2D75600372E08 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FDC2F36F20B2D75600372E08 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -98,7 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				FDC2F36520B2D75400372E08 /* AppDelegate.swift */,
-				FDC2F36720B2D75400372E08 /* ViewController.swift */,
+				FDC2F36720B2D75400372E08 /* ListViewController.swift */,
 				FDC2F36920B2D75400372E08 /* Main.storyboard */,
 				FDC2F36C20B2D75600372E08 /* Assets.xcassets */,
 				FDC2F36E20B2D75600372E08 /* LaunchScreen.storyboard */,
@@ -256,7 +256,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FDC2F36820B2D75400372E08 /* ViewController.swift in Sources */,
+				FDC2F36820B2D75400372E08 /* ListViewController.swift in Sources */,
 				FDC2F36620B2D75400372E08 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
