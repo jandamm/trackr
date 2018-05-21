@@ -14,6 +14,9 @@
 		FDC2F37020B2D75600372E08 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDC2F36E20B2D75600372E08 /* LaunchScreen.storyboard */; };
 		FDC2F37B20B2D75600372E08 /* TrackrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC2F37A20B2D75600372E08 /* TrackrTests.swift */; };
 		FDC2F38620B2D75600372E08 /* TrackrUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC2F38520B2D75600372E08 /* TrackrUITests.swift */; };
+		FDC2F39720B2E53500372E08 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDC2F39620B2E53500372E08 /* SQLite.framework */; };
+		FDC2F39B20B2EAD900372E08 /* SQLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC2F39A20B2EAD900372E08 /* SQLite.swift */; };
+		FDC2F39D20B2F0A100372E08 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC2F39C20B2F0A100372E08 /* Location.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +50,9 @@
 		FDC2F38120B2D75600372E08 /* TrackrUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrackrUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDC2F38520B2D75600372E08 /* TrackrUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackrUITests.swift; sourceTree = "<group>"; };
 		FDC2F38720B2D75600372E08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FDC2F39620B2E53500372E08 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/iOS/SQLite.framework; sourceTree = "<group>"; };
+		FDC2F39A20B2EAD900372E08 /* SQLite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLite.swift; sourceTree = "<group>"; };
+		FDC2F39C20B2F0A100372E08 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDC2F39720B2E53500372E08 /* SQLite.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +88,7 @@
 				FDC2F37920B2D75600372E08 /* TrackrTests */,
 				FDC2F38420B2D75600372E08 /* TrackrUITests */,
 				FDC2F36320B2D75400372E08 /* Products */,
+				FDC2F39620B2E53500372E08 /* SQLite.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,6 +111,8 @@
 				FDC2F36C20B2D75600372E08 /* Assets.xcassets */,
 				FDC2F36E20B2D75600372E08 /* LaunchScreen.storyboard */,
 				FDC2F37120B2D75600372E08 /* Info.plist */,
+				FDC2F39A20B2EAD900372E08 /* SQLite.swift */,
+				FDC2F39C20B2F0A100372E08 /* Location.swift */,
 			);
 			path = Trackr;
 			sourceTree = "<group>";
@@ -132,9 +142,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FDC2F38A20B2D75600372E08 /* Build configuration list for PBXNativeTarget "Trackr" */;
 			buildPhases = (
+				FDC2F39920B2E64600372E08 /* Run Script: SwiftFormat */,
 				FDC2F35E20B2D75400372E08 /* Sources */,
 				FDC2F35F20B2D75400372E08 /* Frameworks */,
 				FDC2F36020B2D75400372E08 /* Resources */,
+				FDC2F39820B2E55600372E08 /* Carthage: Copy Frameworks */,
 			);
 			buildRules = (
 			);
@@ -251,12 +263,47 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		FDC2F39820B2E55600372E08 /* Carthage: Copy Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SQLite.framework",
+			);
+			name = "Carthage: Copy Frameworks";
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SQLite.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		FDC2F39920B2E64600372E08 /* Run Script: SwiftFormat */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script: SwiftFormat";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "$SRCROOT/scripts/run_swiftformat.sh $SRCROOT";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		FDC2F35E20B2D75400372E08 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				FDC2F36820B2D75400372E08 /* ListViewController.swift in Sources */,
+				FDC2F39B20B2EAD900372E08 /* SQLite.swift in Sources */,
+				FDC2F39D20B2F0A100372E08 /* Location.swift in Sources */,
 				FDC2F36620B2D75400372E08 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -432,6 +479,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6N9Z26P656;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Trackr/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -450,6 +501,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6N9Z26P656;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Trackr/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

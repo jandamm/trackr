@@ -6,20 +6,34 @@
 //  Copyright © 2018 Jan Dammshäuser. All rights reserved.
 //
 
+import CoreLocation
 import UIKit
 
 class ListViewController: UIViewController {
-	let data: [String] = ["arst"]
+	var data: [Location] = []
+
+	@IBOutlet private var tableView: UITableView!
+
+	override func viewDidLoad() {
+		super.viewDidLoad()
+
+		do {
+			data = try SQLiteWrapper.getLocations()
+			tableView.reloadData()
+		} catch {
+			print(error)
+		}
+	}
 }
 
 extension ListViewController: UITableViewDataSource {
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
 		return data.count
 	}
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "List.Cell", for: indexPath)
-		cell.textLabel?.text = data[indexPath.row]
+		cell.textLabel?.text = String(describing: data[indexPath.row])
 		return cell
 	}
 }
