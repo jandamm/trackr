@@ -18,6 +18,10 @@ class ListViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
+		let refreshControl = UIRefreshControl(frame: .zero)
+		refreshControl.addTarget(self, action: #selector(reloadData), for: .valueChanged)
+		tableView.refreshControl = refreshControl
+
 		observer = NotificationCenter.default.addObserver(forName: NSNotification.Name("Update"), object: nil, queue: .main, using: { [unowned self] _ in
 			try? self.reloadData()
 		})
@@ -29,9 +33,10 @@ class ListViewController: UIViewController {
 		}
 	}
 
-	func reloadData() throws {
+	@objc func reloadData() throws {
 		data = try SQLiteWrapper.getLocations().sorted(by: >)
 		tableView.reloadData()
+		tableView.refreshControl?.endRefreshing()
 	}
 }
 
