@@ -39,6 +39,11 @@ class SQLiteWrapper {
 		_ = try db.run(insert)
 	}
 
+	static func remove(_ l: Location) throws {
+		let entry = location.filter(date == l.date.timeIntervalSince1970)
+		try db.run(entry.delete())
+	}
+
 	static func getLastLocation() throws -> Location {
 		let filteredTable = location.order(date.desc)
 			.limit(1)
