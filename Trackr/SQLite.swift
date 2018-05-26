@@ -39,18 +39,36 @@ class SQLiteWrapper {
 		_ = try db.run(insert)
 	}
 
-	static func getLocations() throws -> [Location] {
-		return try db.prepare(location).map { row in
-			let date = row[self.date]
-			let lon = row[self.lon]
-			let lat = row[self.lat]
-			let alt = row[self.alt]
-			return Location(date: Date(timeIntervalSince1970: date),
-			                location: CLLocationCoordinate2D(latitude: lat, longitude: lon),
-			                altitude: alt
-			)
-		}
+	static func remove(_ l: Location) throws {
+		let entry = location.filter(date == l.date.timeIntervalSince1970)
+		try db.run(entry.delete())
 	}
+
+	static func getLastLocation() throws -> Location {
+		let filteredTable = location.order(date.desc)
+			.limit(1)
+		let rowList = try db.prepare(filteredTable).map(rowMapper)
+
+		guard let firstEntry = rowList.first else {
+			throw SQLError("No Entry")
+		}
+		return firstEntry
+	}
+
+	static func getLocations() throws -> [Location] {
+		return try db.prepare(location).map(rowMapper)
+	}
+}
+
+private func rowMapper(_ row: Row) -> Location {
+	let date = row[SQLiteWrapper.date]
+	let lon = row[SQLiteWrapper.lon]
+	let lat = row[SQLiteWrapper.lat]
+	let alt = row[SQLiteWrapper.alt]
+	return Location(date: Date(timeIntervalSince1970: date),
+	                location: CLLocationCoordinate2D(latitude: lat, longitude: lon),
+	                altitude: alt
+	)
 }
 
 func addColumn<T: Value>(column: Expression<T?>, to database: Connection, in table: Table) throws {
@@ -61,5 +79,13 @@ func addColumn<T: Value>(column: Expression<T?>, to database: Connection, in tab
 			code == 1
 		else { throw error }
 		print(message)
+	}
+}
+
+struct SQLError: Error, CustomStringConvertible {
+	let description: String
+
+	init(_ description: String) {
+		self.description = description
 	}
 }
