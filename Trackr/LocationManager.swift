@@ -28,6 +28,13 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
 	func locationManager(_: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 		guard let location = locations.last else { return }
 		let loc = Location(date: Date(), location: location.coordinate, altitude: location.altitude)
+
+		let lastLocation = try? SQLiteWrapper.getLastLocation()
+
+		guard !optional(isEqualLocation)(loc, lastLocation) else {
+			return
+		}
+
 		do {
 			try SQLiteWrapper.add(loc)
 			NotificationCenter.default.post(name: NSNotification.Name("Update"), object: nil)
