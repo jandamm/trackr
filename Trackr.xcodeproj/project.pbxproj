@@ -17,6 +17,7 @@
 		FDC2F39720B2E53500372E08 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDC2F39620B2E53500372E08 /* SQLite.framework */; };
 		FDC2F39B20B2EAD900372E08 /* SQLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC2F39A20B2EAD900372E08 /* SQLite.swift */; };
 		FDC2F39D20B2F0A100372E08 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC2F39C20B2F0A100372E08 /* Location.swift */; };
+		FDC2F39F20B3028900372E08 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC2F39E20B3028900372E08 /* LocationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		FDC2F39620B2E53500372E08 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/iOS/SQLite.framework; sourceTree = "<group>"; };
 		FDC2F39A20B2EAD900372E08 /* SQLite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLite.swift; sourceTree = "<group>"; };
 		FDC2F39C20B2F0A100372E08 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		FDC2F39E20B3028900372E08 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				FDC2F37120B2D75600372E08 /* Info.plist */,
 				FDC2F39A20B2EAD900372E08 /* SQLite.swift */,
 				FDC2F39C20B2F0A100372E08 /* Location.swift */,
+				FDC2F39E20B3028900372E08 /* LocationManager.swift */,
 			);
 			path = Trackr;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 			files = (
 				FDC2F36820B2D75400372E08 /* ListViewController.swift in Sources */,
 				FDC2F39B20B2EAD900372E08 /* SQLite.swift in Sources */,
+				FDC2F39F20B3028900372E08 /* LocationManager.swift in Sources */,
 				FDC2F39D20B2F0A100372E08 /* Location.swift in Sources */,
 				FDC2F36620B2D75400372E08 /* AppDelegate.swift in Sources */,
 			);

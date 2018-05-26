@@ -10,19 +10,33 @@ import CoreLocation
 import UIKit
 
 class ListViewController: UIViewController {
-	var data: [Location] = []
+	private var data: [Location] = []
 
+	private var observer: NSObjectProtocol!
 	@IBOutlet private var tableView: UITableView!
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
+		let refreshControl = UIRefreshControl(frame: .zero)
+		refreshControl.addTarget(self, action: #selector(reloadData), for: .valueChanged)
+		tableView.refreshControl = refreshControl
+
+		observer = NotificationCenter.default.addObserver(forName: NSNotification.Name("Update"), object: nil, queue: .main, using: { [unowned self] _ in
+			try? self.reloadData()
+		})
+
 		do {
-			data = try SQLiteWrapper.getLocations()
-			tableView.reloadData()
+			try reloadData()
 		} catch {
 			print(error)
 		}
+	}
+
+	@objc func reloadData() throws {
+		data = try SQLiteWrapper.getLocations().sorted(by: >)
+		tableView.reloadData()
+		tableView.refreshControl?.endRefreshing()
 	}
 }
 

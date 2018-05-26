@@ -16,6 +16,7 @@ class SQLiteWrapper {
 	static let date = Expression<Double>("date")
 	static let lon = Expression<Double>("lon")
 	static let lat = Expression<Double>("lat")
+	static let alt = Expression<Double>("alt")
 
 	static func setup() throws {
 		let path = NSSearchPathForDirectoriesInDomains(
@@ -29,11 +30,12 @@ class SQLiteWrapper {
 			t.column(date, unique: true)
 			t.column(lon)
 			t.column(lat)
+			t.column(alt)
 		})
 	}
 
 	static func add(_ l: Location) throws {
-		let insert = location.insert(date <- l.date.timeIntervalSince1970, lon <- l.location.longitude, lat <- l.location.latitude)
+		let insert = location.insert(date <- l.date.timeIntervalSince1970, lon <- l.location.longitude, lat <- l.location.latitude, alt <- l.altitude)
 		_ = try db.run(insert)
 	}
 
@@ -42,8 +44,10 @@ class SQLiteWrapper {
 			let date = row[self.date]
 			let lon = row[self.lon]
 			let lat = row[self.lat]
+			let alt = row[self.alt]
 			return Location(date: Date(timeIntervalSince1970: date),
-			                location: CLLocationCoordinate2D(latitude: lat, longitude: lon)
+			                location: CLLocationCoordinate2D(latitude: lat, longitude: lon),
+			                altitude: alt
 			)
 		}
 	}
