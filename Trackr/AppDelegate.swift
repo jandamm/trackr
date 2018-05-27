@@ -19,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		LocationManager.shared.start()
 		requestNotificationAllowance()
 
+		addLocations()
+		showErrors()
+
 		return true
 	}
 
@@ -38,11 +41,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func applicationDidBecomeActive(_: UIApplication) {
 		// Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-		guard let list = window?.rootViewController as? ListViewController else { return }
-		try? list.reloadData()
+		reloadTable()
 	}
 
 	func applicationWillTerminate(_: UIApplication) {
 		// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+	}
+
+	private func reloadTable() {
+		guard let list = window?.rootViewController as? ListViewController else { return }
+		try? list.reloadData()
+	}
+
+	private func addLocations() {
+		do {
+			try Defaults.getLocations()
+				.forEach(SQLiteWrapper.add)
+			Defaults.deleteLocations()
+			reloadTable()
+		} catch {
+			print(error)
+		}
+	}
+
+	private func showErrors() {
+		let message = Defaults.getErrors()
+			.map(String.init(describing:))
+			.joined(separator: "\n")
+
+		let alert = UIAlertController(title: "There have been errors:", message: message, preferredStyle: .alert)
+		window?.rootViewController?.present(alert, animated: true, completion: nil)
 	}
 }
