@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 		try! SQLiteWrapper.setup()
 		LocationManager.shared.start()
+		requestNotificationAllowance()
 
 		return true
 	}
