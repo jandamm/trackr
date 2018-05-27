@@ -39,8 +39,9 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
 			try SQLiteWrapper.add(loc)
 			NotificationCenter.default.post(name: NSNotification.Name("Update"), object: nil)
 		} catch {
-			print(error)
-			// TODO: alternative saving method
+			Defaults.appendError(error)
+			Defaults.appendLocation(loc)
+			sendNotification("Please open Trackr", body: String(describing: error))
 		}
 	}
 }
