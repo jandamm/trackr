@@ -65,11 +65,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
 
 	private func showErrors() {
-		let message = Defaults.getErrors()
+		let errors = Defaults.getErrors()
+
+		guard errors.count > 0 else { return }
+		let message = errors
 			.map(String.init(describing:))
 			.joined(separator: "\n")
 
 		let alert = UIAlertController(title: "There have been errors:", message: message, preferredStyle: .alert)
-		window?.rootViewController?.present(alert, animated: true, completion: nil)
+		let action = UIAlertAction(title: "Ok", style: .default, handler: match(Defaults.deleteErrors))
+		alert.addAction(action)
+		DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+			guard let `self` = self else { return }
+			self.window?.rootViewController?.present(alert, animated: true, completion: nil)
+		}
 	}
 }
