@@ -35,8 +35,8 @@ class ListViewController: UIViewController {
 
 	@objc func reloadData() throws {
 		data = try SQLiteWrapper.getLocations().sorted(by: >)
-		tableView.reloadData()
-		tableView.refreshControl?.endRefreshing()
+		tableView?.reloadData()
+		tableView?.refreshControl?.endRefreshing()
 	}
 }
 

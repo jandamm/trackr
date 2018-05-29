@@ -18,6 +18,9 @@
 		FDC2F39B20B2EAD900372E08 /* SQLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC2F39A20B2EAD900372E08 /* SQLite.swift */; };
 		FDC2F39D20B2F0A100372E08 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC2F39C20B2F0A100372E08 /* Location.swift */; };
 		FDC2F39F20B3028900372E08 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC2F39E20B3028900372E08 /* LocationManager.swift */; };
+		FDCADB3F20BC4FC500694372 /* GenericFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCADB3E20BC4FC500694372 /* GenericFunc.swift */; };
+		FDD4569B20B9F69D00D47D6F /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD4569A20B9F69D00D47D6F /* UserDefaults.swift */; };
+		FDD4569D20BB0F8A00D47D6F /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD4569C20BB0F8A00D47D6F /* Notifications.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,9 @@
 		FDC2F39A20B2EAD900372E08 /* SQLite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLite.swift; sourceTree = "<group>"; };
 		FDC2F39C20B2F0A100372E08 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		FDC2F39E20B3028900372E08 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		FDCADB3E20BC4FC500694372 /* GenericFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericFunc.swift; sourceTree = "<group>"; };
+		FDD4569A20B9F69D00D47D6F /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		FDD4569C20BB0F8A00D47D6F /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +122,9 @@
 				FDC2F39A20B2EAD900372E08 /* SQLite.swift */,
 				FDC2F39C20B2F0A100372E08 /* Location.swift */,
 				FDC2F39E20B3028900372E08 /* LocationManager.swift */,
+				FDD4569C20BB0F8A00D47D6F /* Notifications.swift */,
+				FDD4569A20B9F69D00D47D6F /* UserDefaults.swift */,
+				FDCADB3E20BC4FC500694372 /* GenericFunc.swift */,
 			);
 			path = Trackr;
 			sourceTree = "<group>";
@@ -305,8 +314,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				FDC2F36820B2D75400372E08 /* ListViewController.swift in Sources */,
+				FDD4569D20BB0F8A00D47D6F /* Notifications.swift in Sources */,
 				FDC2F39B20B2EAD900372E08 /* SQLite.swift in Sources */,
+				FDD4569B20B9F69D00D47D6F /* UserDefaults.swift in Sources */,
 				FDC2F39F20B3028900372E08 /* LocationManager.swift in Sources */,
+				FDCADB3F20BC4FC500694372 /* GenericFunc.swift in Sources */,
 				FDC2F39D20B2F0A100372E08 /* Location.swift in Sources */,
 				FDC2F36620B2D75400372E08 /* AppDelegate.swift in Sources */,
 			);
