@@ -14,6 +14,7 @@ func sendNotification(_ title: String, body: String) {
 	let content = UNMutableNotificationContent()
 	content.title = title
 	content.body = body
+	content.badge = 1
 	let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
 	let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
 	notificationCenter.add(request) { error in
