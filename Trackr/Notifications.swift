@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 import UserNotifications
 
 func sendNotification(_ title: String, body: String) {
@@ -29,4 +30,9 @@ func requestNotificationAllowance() {
 		guard let error = error else { return }
 		print(error)
 	}
+}
+
+func resetNotifications() {
+	UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+	UIApplication.shared.applicationIconBadgeNumber = 0
 }

@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		LocationManager.shared.start()
 		requestNotificationAllowance()
 
+		resetNotifications()
+
 		addLocations()
 		showErrors()
 
