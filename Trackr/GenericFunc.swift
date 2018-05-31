@@ -55,16 +55,6 @@ func smaller<Root, Value: Comparable>(_ kp: KeyPath<Root, Value>) ->
 	}
 }
 
-func map<A, B>(_ f: @escaping (A) -> B) ->
-	(Array<A>) -> Array<B> {
-	return { $0.map(f) }
-}
-
-func map<A, B>(_ f: @escaping (A) -> B) ->
-	(Optional<A>) -> Optional<B> {
-	return { $0.map(f) }
-}
-
 func match<A, B>(_ f: @escaping () -> B) ->
 	(A) -> B {
 	return { _ in

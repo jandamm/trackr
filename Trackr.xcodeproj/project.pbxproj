@@ -21,6 +21,7 @@
 		FDC2F39F20B3028900372E08 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC2F39E20B3028900372E08 /* LocationManager.swift */; };
 		FDCADB4120BD6D0200694372 /* GenericFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCADB4020BD6D0200694372 /* GenericFunc.swift */; };
 		FDD4569B20B9F69D00D47D6F /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD4569A20B9F69D00D47D6F /* UserDefaults.swift */; };
+		FDFA8B8620BFC92500F45F55 /* Overture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDFA8B8520BFC92500F45F55 /* Overture.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		FDCADB4020BD6D0200694372 /* GenericFunc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericFunc.swift; sourceTree = "<group>"; };
 		FDD4569A20B9F69D00D47D6F /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		FDD4569C20BB0F8A00D47D6F /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		FDFA8B8520BFC92500F45F55 /* Overture.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Overture.framework; path = Carthage/Build/iOS/Overture.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDFA8B8620BFC92500F45F55 /* Overture.framework in Frameworks */,
 				FDC2F39720B2E53500372E08 /* SQLite.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -96,6 +99,7 @@
 				FDC2F37920B2D75600372E08 /* TrackrTests */,
 				FDC2F38420B2D75600372E08 /* TrackrUITests */,
 				FDC2F36320B2D75400372E08 /* Products */,
+				FDFA8B8520BFC92500F45F55 /* Overture.framework */,
 				FDC2F39620B2E53500372E08 /* SQLite.framework */,
 			);
 			sourceTree = "<group>";
@@ -286,10 +290,12 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/SQLite.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Overture.framework",
 			);
 			name = "Carthage: Copy Frameworks";
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SQLite.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Overture.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
