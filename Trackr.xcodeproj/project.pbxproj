@@ -23,6 +23,7 @@
 		FDD4569B20B9F69D00D47D6F /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD4569A20B9F69D00D47D6F /* UserDefaults.swift */; };
 		FDFA8B8620BFC92500F45F55 /* Overture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDFA8B8520BFC92500F45F55 /* Overture.framework */; };
 		FDFA8B8820BFCCA600F45F55 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFA8B8720BFCCA600F45F55 /* Operators.swift */; };
+		FDFA8B8A20BFCE6C00F45F55 /* Labelled.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFA8B8920BFCE6C00F45F55 /* Labelled.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		FDD4569C20BB0F8A00D47D6F /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		FDFA8B8520BFC92500F45F55 /* Overture.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Overture.framework; path = Carthage/Build/iOS/Overture.framework; sourceTree = "<group>"; };
 		FDFA8B8720BFCCA600F45F55 /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
+		FDFA8B8920BFCE6C00F45F55 /* Labelled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Labelled.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 				FDD4569A20B9F69D00D47D6F /* UserDefaults.swift */,
 				FDCADB4020BD6D0200694372 /* GenericFunc.swift */,
 				FDFA8B8720BFCCA600F45F55 /* Operators.swift */,
+				FDFA8B8920BFCE6C00F45F55 /* Labelled.swift */,
 			);
 			path = Trackr;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				FDC2F36820B2D75400372E08 /* ListViewController.swift in Sources */,
 				FDCADB4120BD6D0200694372 /* GenericFunc.swift in Sources */,
 				FDC2F39B20B2EAD900372E08 /* SQLite.swift in Sources */,
+				FDFA8B8A20BFCE6C00F45F55 /* Labelled.swift in Sources */,
 				FDD4569B20B9F69D00D47D6F /* UserDefaults.swift in Sources */,
 				FDC2F39F20B3028900372E08 /* LocationManager.swift in Sources */,
 				FDC2F39D20B2F0A100372E08 /* Location.swift in Sources */,
