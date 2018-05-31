@@ -8,6 +8,7 @@
 
 import CoreLocation
 import Foundation
+import Overture
 
 struct Location {
 	let date: Date
@@ -86,7 +87,7 @@ private let numberFormatter = { () -> NumberFormatter in
 	return numberFormatter
 }()
 
-let groupLocations = reduce(group(by: \Location.index))([Location.Index: [Location]]())
+let groupLocations = reduce(group(by: ^(\Location.index)))([Location.Index: [Location]]())
 
 func optional<A>(_ f: @escaping (A, A) -> Bool) ->
 	(A?, A?) -> Bool {
@@ -101,8 +102,8 @@ func optional<A>(_ f: @escaping (A, A) -> Bool) ->
 }
 
 func isEqualLocation(_ location1: Location, _ location2: Location) -> Bool {
-	guard equal(\.altitude)(location1, location2) else { return false }
-	guard equal(\.location.longitude)(location1, location2) else { return false }
-	guard equal(\.location.latitude)(location1, location2) else { return false }
+	guard equal(^(\.altitude))(location1, location2) else { return false }
+	guard equal(^(\.location.longitude))(location1, location2) else { return false }
+	guard equal(^(\.location.latitude))(location1, location2) else { return false }
 	return true
 }

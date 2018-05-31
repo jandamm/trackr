@@ -26,32 +26,32 @@ func reduce<Result, A>(_ f: @escaping (inout Result, A) -> Void) ->
 	}
 }
 
-func group<Root, Key: Hashable>(by kp: KeyPath<Root, Key>) ->
+func group<Root, Key: Hashable>(by f: @escaping (Root) -> Key) ->
 	(inout [Key: [Root]], Root) -> Void {
 	return { dict, root in
-		let key = root[keyPath: kp]
+		let key = f(root)
 		dict[key, default: [Root]()].append(root)
 	}
 }
 
-func equal<Root, Value: Equatable>(_ kp: KeyPath<Root, Value>) ->
+func equal<Root, Value: Equatable>(_ f: @escaping (Root) -> Value) ->
 	(_ lhs: Root, _ rhs: Root) -> Bool {
 	return { lhs, rhs in
-		lhs[keyPath: kp] == rhs[keyPath: kp]
+		f(lhs) == f(rhs)
 	}
 }
 
-func greater<Root, Value: Comparable>(_ kp: KeyPath<Root, Value>) ->
+func greater<Root, Value: Comparable>(_ f: @escaping (Root) -> Value) ->
 	(_ lhs: Root, _ rhs: Root) -> Bool {
 	return { lhs, rhs in
-		lhs[keyPath: kp] > rhs[keyPath: kp]
+		f(lhs) > f(rhs)
 	}
 }
 
-func smaller<Root, Value: Comparable>(_ kp: KeyPath<Root, Value>) ->
+func smaller<Root, Value: Comparable>(_ f: @escaping (Root) -> Value) ->
 	(_ lhs: Root, _ rhs: Root) -> Bool {
 	return { lhs, rhs in
-		lhs[keyPath: kp] < rhs[keyPath: kp]
+		f(lhs) < f(rhs)
 	}
 }
 

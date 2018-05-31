@@ -7,11 +7,12 @@
 //
 
 import CoreLocation
+import Overture
 import UIKit
 
 class ListViewController: UIViewController {
 	private var data: [Location.Index: [Location]] = [:] {
-		didSet { sections = data.keys.sorted(by: greater(\.date)) }
+		didSet { sections = data.keys.sorted(by: greater(^(\.date))) }
 	}
 
 	private var sections: [Location.Index] = []
