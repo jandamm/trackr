@@ -34,6 +34,27 @@ func group<Root, Key: Hashable>(by kp: KeyPath<Root, Key>) ->
 	}
 }
 
+func equal<Root, Value: Equatable>(_ kp: KeyPath<Root, Value>) ->
+	(_ lhs: Root, _ rhs: Root) -> Bool {
+	return { lhs, rhs in
+		lhs[keyPath: kp] == rhs[keyPath: kp]
+	}
+}
+
+func greater<Root, Value: Comparable>(_ kp: KeyPath<Root, Value>) ->
+	(_ lhs: Root, _ rhs: Root) -> Bool {
+	return { lhs, rhs in
+		lhs[keyPath: kp] > rhs[keyPath: kp]
+	}
+}
+
+func smaller<Root, Value: Comparable>(_ kp: KeyPath<Root, Value>) ->
+	(_ lhs: Root, _ rhs: Root) -> Bool {
+	return { lhs, rhs in
+		lhs[keyPath: kp] < rhs[keyPath: kp]
+	}
+}
+
 func map<A, B>(_ f: @escaping (A) -> B) ->
 	(Array<A>) -> Array<B> {
 	return { $0.map(f) }

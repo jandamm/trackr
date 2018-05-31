@@ -97,11 +97,3 @@ func isEqualLocation(_ location1: Location, _ location2: Location) -> Bool {
 	guard equal(\.location.latitude)(location1, location2) else { return false }
 	return true
 }
-
-func equal<Root, Value: Equatable>
-(_ kp: KeyPath<Root, Value>) ->
-	(_ lhs: Root, _ rhs: Root) -> Bool {
-	return { lhs, rhs in
-		lhs[keyPath: kp] == rhs[keyPath: kp]
-	}
-}
