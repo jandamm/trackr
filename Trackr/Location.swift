@@ -36,34 +36,10 @@ extension Location: Comparable {
 }
 
 extension Location {
-	struct Index {
-		let date: Date
-		let label: String
+	typealias Index = Labelled<Date, String>
 
-		init(date: Date) {
-			self.date = date
-			label = dateFormatter.string(from: date)
-		}
-	}
-
-	var index: Index {
-		return Index(date: date)
-	}
-}
-
-extension Location.Index: Comparable {
-	static func < (lhs: Location.Index, rhs: Location.Index) -> Bool {
-		return lhs.label < rhs.label
-	}
-
-	static func == (lhs: Location.Index, rhs: Location.Index) -> Bool {
-		return lhs.label == rhs.label
-	}
-}
-
-extension Location.Index: Hashable {
-	var hashValue: Int {
-		return label.hashValue
+	func index() -> Index {
+		return Index(base: date, convert: { dateFormatter.string(from: $0) })
 	}
 }
 
@@ -87,7 +63,9 @@ private let numberFormatter = { () -> NumberFormatter in
 	return numberFormatter
 }()
 
-let groupLocations = reduce(group(by: ^(\Location.index)))([Location.Index: [Location]]())
+// TODO: nicer composing
+let indexLocation = zurry(flip(Location.index))
+let groupLocations = reduce(group(by: indexLocation))([Location.Index: [Location]]())
 
 func optional<A>(_ f: @escaping (A, A) -> Bool) ->
 	(A?, A?) -> Bool {

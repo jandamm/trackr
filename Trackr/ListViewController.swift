@@ -11,11 +11,10 @@ import Overture
 import UIKit
 
 class ListViewController: UIViewController {
-	private var data: [Location.Index: [Location]] = [:] {
-		didSet { sections = data.keys.sorted(by: greater(^(\.date))) }
-	}
-
 	private var sections: [Location.Index] = []
+	private var data: [Location.Index: [Location]] = [:] {
+		didSet { sections = data.keys.sorted(by: greater(^(\.base))) }
+	}
 
 	private var observer: NSObjectProtocol!
 	@IBOutlet private var tableView: UITableView!
