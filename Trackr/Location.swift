@@ -34,6 +34,38 @@ extension Location: Comparable {
 	}
 }
 
+extension Location {
+	struct Index {
+		let date: Date
+		let label: String
+
+		init(date: Date) {
+			self.date = date
+			label = dateFormatter.string(from: date)
+		}
+	}
+
+	var index: Index {
+		return Index(date: date)
+	}
+}
+
+extension Location.Index: Comparable {
+	static func < (lhs: Location.Index, rhs: Location.Index) -> Bool {
+		return lhs.label < rhs.label
+	}
+
+	static func == (lhs: Location.Index, rhs: Location.Index) -> Bool {
+		return lhs.label == rhs.label
+	}
+}
+
+extension Location.Index: Hashable {
+	var hashValue: Int {
+		return label.hashValue
+	}
+}
+
 private let dateFormatter = { () -> DateFormatter in
 	let dateFormatter = DateFormatter()
 	dateFormatter.dateStyle = .short
