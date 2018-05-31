@@ -17,7 +17,7 @@ struct Location {
 
 extension Location: CustomStringConvertible {
 	var description: String {
-		let dateString = dateFormatter.string(from: date)
+		let dateString = timeFormatter.string(from: date)
 		let lon = numberFormatter.string(from: location.longitude as NSNumber)
 		let lat = numberFormatter.string(from: location.latitude as NSNumber)
 		return "\(dateString): \(lon ?? "nil") - \(lat ?? "")"
@@ -69,6 +69,13 @@ extension Location.Index: Hashable {
 private let dateFormatter = { () -> DateFormatter in
 	let dateFormatter = DateFormatter()
 	dateFormatter.dateStyle = .short
+	dateFormatter.timeStyle = .none
+	return dateFormatter
+}()
+
+private let timeFormatter = { () -> DateFormatter in
+	let dateFormatter = DateFormatter()
+	dateFormatter.dateStyle = .none
 	dateFormatter.timeStyle = .short
 	return dateFormatter
 }()
