@@ -79,6 +79,8 @@ private let numberFormatter = { () -> NumberFormatter in
 	return numberFormatter
 }()
 
+let groupLocations = reduce(group(by: \Location.index))([Location.Index: [Location]]())
+
 func optional<A>(_ f: @escaping (A, A) -> Bool) ->
 	(A?, A?) -> Bool {
 	return { a1, a2 in
