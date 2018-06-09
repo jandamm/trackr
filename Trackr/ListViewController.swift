@@ -13,7 +13,7 @@ import UIKit
 class ListViewController: UIViewController {
 	private var sections: [Location.Index] = []
 	private var data: [Location.Index: [Location]] = [:] {
-		didSet { sections = data.keys.sorted(by: greater(^(\.base))) }
+		didSet { sections = data.keys.sorted(by: greater(^\.base)) }
 	}
 
 	private var observer: NSObjectProtocol!
