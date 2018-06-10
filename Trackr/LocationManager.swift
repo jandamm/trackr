@@ -26,16 +26,13 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
 	}
 
 	func locationManager(_: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-		let locations = locations.map {
-			Location(date: $0.timestamp, location: $0.coordinate, altitude: $0.altitude)
-		}
-
 		guard locations.count > 0 else { return }
 
 		let lastLocation = try? SQLiteWrapper.getLastLocation()
 
 		var hasUpdates = false
-		locations.forEach { location in
+		locations.forEach { clLocation in
+			let location = Location(date: clLocation.timestamp, location: clLocation.coordinate, altitude: clLocation.altitude)
 			guard !optional(isEqualLocation)(location, lastLocation) else {
 				return
 			}
