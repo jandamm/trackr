@@ -8,6 +8,7 @@
 
 import CoreLocation
 import Foundation
+import Overture
 
 struct Location {
 	let date: Date
@@ -17,7 +18,7 @@ struct Location {
 
 extension Location: CustomStringConvertible {
 	var description: String {
-		let dateString = dateFormatter.string(from: date)
+		let dateString = timeFormatter.string(from: date)
 		let lon = numberFormatter.string(from: location.longitude as NSNumber)
 		let lat = numberFormatter.string(from: location.latitude as NSNumber)
 		return "\(dateString): \(lon ?? "nil") - \(lat ?? "")"
@@ -34,9 +35,24 @@ extension Location: Comparable {
 	}
 }
 
+extension Location {
+	typealias Index = Labelled<Date, String>
+
+	func index() -> Index {
+		return Index(base: date, convert: { dateFormatter.string(from: $0) })
+	}
+}
+
 private let dateFormatter = { () -> DateFormatter in
 	let dateFormatter = DateFormatter()
 	dateFormatter.dateStyle = .short
+	dateFormatter.timeStyle = .none
+	return dateFormatter
+}()
+
+private let timeFormatter = { () -> DateFormatter in
+	let dateFormatter = DateFormatter()
+	dateFormatter.dateStyle = .none
 	dateFormatter.timeStyle = .short
 	return dateFormatter
 }()
@@ -46,6 +62,10 @@ private let numberFormatter = { () -> NumberFormatter in
 	numberFormatter.maximumFractionDigits = 5
 	return numberFormatter
 }()
+
+// TODO: nicer composing
+let indexLocation = zurry(flip(Location.index))
+let groupLocations = reduce(group(by: indexLocation))([Location.Index: [Location]]())
 
 func optional<A>(_ f: @escaping (A, A) -> Bool) ->
 	(A?, A?) -> Bool {
@@ -60,16 +80,8 @@ func optional<A>(_ f: @escaping (A, A) -> Bool) ->
 }
 
 func isEqualLocation(_ location1: Location, _ location2: Location) -> Bool {
-	guard equal(\.altitude)(location1, location2) else { return false }
-	guard equal(\.location.longitude)(location1, location2) else { return false }
-	guard equal(\.location.latitude)(location1, location2) else { return false }
+	guard equal(^\.altitude)(location1, location2) else { return false }
+	guard equal(^\.location.longitude)(location1, location2) else { return false }
+	guard equal(^\.location.latitude)(location1, location2) else { return false }
 	return true
-}
-
-func equal<Root, Value: Equatable>
-(_ kp: KeyPath<Root, Value>) ->
-	(_ lhs: Root, _ rhs: Root) -> Bool {
-	return { lhs, rhs in
-		lhs[keyPath: kp] == rhs[keyPath: kp]
-	}
 }

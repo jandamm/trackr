@@ -1,1 +1,2 @@
+github "pointfreeco/swift-overture" "0.2.0"
 github "stephencelis/SQLite.swift" "0.11.5"

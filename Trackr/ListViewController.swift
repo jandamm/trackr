@@ -7,10 +7,14 @@
 //
 
 import CoreLocation
+import Overture
 import UIKit
 
 class ListViewController: UIViewController {
-	private var data: [Location] = []
+	private var sections: [Location.Index] = []
+	private var data: [Location.Index: [Location]] = [:] {
+		didSet { sections = data.keys.sorted(by: greater(^\.base)) }
+	}
 
 	private var observer: NSObjectProtocol!
 	@IBOutlet private var tableView: UITableView!
@@ -34,20 +38,34 @@ class ListViewController: UIViewController {
 	}
 
 	@objc func reloadData() throws {
-		data = try SQLiteWrapper.getLocations().sorted(by: >)
+		let rawData = try SQLiteWrapper.getLocations().sorted(by: >)
+		data = groupLocations(rawData)
 		tableView?.reloadData()
 		tableView?.refreshControl?.endRefreshing()
 	}
 }
 
 extension ListViewController: UITableViewDataSource {
-	func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-		return data.count
+	func numberOfSections(in _: UITableView) -> Int {
+		return sections.count
+	}
+
+	func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
+		let section = sections[section]
+		return data[section]?.count ?? 0
+	}
+
+	func tableView(_: UITableView, titleForHeaderInSection section: Int) -> String? {
+		return sections[section].label
 	}
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "List.Cell", for: indexPath)
-		cell.textLabel?.text = String(describing: data[indexPath.row])
+
+		let section = sections[indexPath.section]
+		guard let sectionData = data[section] else { return cell }
+
+		cell.textLabel?.text = String(describing: sectionData[indexPath.row])
 		return cell
 	}
 }
