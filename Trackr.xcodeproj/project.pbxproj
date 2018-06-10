@@ -105,28 +105,74 @@
 		FDB1FB9020CD4763007D8F3D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				FDC2F39C20B2F0A100372E08 /* Location.swift */,
 				FDB1FB9120CD4771007D8F3D /* Address.swift */,
+				FDC2F39C20B2F0A100372E08 /* Location.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
-		FDB1FB9620CDBF50007D8F3D /* Storage */ = {
+		FDB1FB9620CDBF50007D8F3D /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
-				FDB1FB9420CDBBFD007D8F3D /* UserDefaultsProtocol.swift */,
-				FDD4569A20B9F69D00D47D6F /* Defaults.swift */,
 				FDC2F39A20B2EAD900372E08 /* SQLite.swift */,
+				FDD4569A20B9F69D00D47D6F /* Defaults.swift */,
+				FDB1FB9420CDBBFD007D8F3D /* UserDefaultsProtocol.swift */,
 			);
-			path = Storage;
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		FDB1FB9820CDC074007D8F3D /* Ressources */ = {
+			isa = PBXGroup;
+			children = (
+				FDC2F36C20B2D75600372E08 /* Assets.xcassets */,
+				FDC2F36E20B2D75600372E08 /* LaunchScreen.storyboard */,
+				FDC2F37120B2D75600372E08 /* Info.plist */,
+			);
+			path = Ressources;
+			sourceTree = "<group>";
+		};
+		FDB1FB9920CDC098007D8F3D /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				FDC2F39E20B3028900372E08 /* LocationManager.swift */,
+				FDB1FB8E20CD3FDE007D8F3D /* GeoCoder.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
+		FDB1FB9A20CDC0B2007D8F3D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FDC2F36720B2D75400372E08 /* ListViewController.swift */,
+				FDC2F36920B2D75400372E08 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FDB1FB9C20CDC123007D8F3D /* Utlilities */ = {
+			isa = PBXGroup;
+			children = (
+				FDD4569C20BB0F8A00D47D6F /* Notifications.swift */,
+			);
+			path = Utlilities;
+			sourceTree = "<group>";
+		};
+		FDB1FB9E20CDC1F7007D8F3D /* Generics */ = {
+			isa = PBXGroup;
+			children = (
+				FDFA8B8920BFCE6C00F45F55 /* Labelled.swift */,
+				FDCADB4020BD6D0200694372 /* GenericFunc.swift */,
+				FDFA8B8720BFCCA600F45F55 /* Operators.swift */,
+			);
+			path = Generics;
 			sourceTree = "<group>";
 		};
 		FDC2F35920B2D75400372E08 = {
 			isa = PBXGroup;
 			children = (
 				FDC2F36420B2D75400372E08 /* Trackr */,
-				FDC2F37920B2D75600372E08 /* TrackrTests */,
-				FDC2F38420B2D75600372E08 /* TrackrUITests */,
+				FDC2F37920B2D75600372E08 /* Tests */,
+				FDC2F38420B2D75600372E08 /* UITests */,
 				FDC2F36320B2D75400372E08 /* Products */,
 				FDFA8B8520BFC92500F45F55 /* Overture.framework */,
 				FDC2F39620B2E53500372E08 /* SQLite.framework */,
@@ -146,40 +192,34 @@
 		FDC2F36420B2D75400372E08 /* Trackr */ = {
 			isa = PBXGroup;
 			children = (
-				FDB1FB9620CDBF50007D8F3D /* Storage */,
-				FDB1FB9020CD4763007D8F3D /* Model */,
 				FDC2F36520B2D75400372E08 /* AppDelegate.swift */,
-				FDC2F36720B2D75400372E08 /* ListViewController.swift */,
-				FDC2F36920B2D75400372E08 /* Main.storyboard */,
-				FDC2F36C20B2D75600372E08 /* Assets.xcassets */,
-				FDC2F36E20B2D75600372E08 /* LaunchScreen.storyboard */,
-				FDC2F37120B2D75600372E08 /* Info.plist */,
-				FDC2F39E20B3028900372E08 /* LocationManager.swift */,
-				FDD4569C20BB0F8A00D47D6F /* Notifications.swift */,
-				FDCADB4020BD6D0200694372 /* GenericFunc.swift */,
-				FDFA8B8720BFCCA600F45F55 /* Operators.swift */,
-				FDFA8B8920BFCE6C00F45F55 /* Labelled.swift */,
-				FDB1FB8E20CD3FDE007D8F3D /* GeoCoder.swift */,
+				FDB1FB9920CDC098007D8F3D /* Location */,
+				FDB1FB9620CDBF50007D8F3D /* Persistence */,
+				FDB1FB9020CD4763007D8F3D /* Model */,
+				FDB1FB9A20CDC0B2007D8F3D /* View */,
+				FDB1FB9E20CDC1F7007D8F3D /* Generics */,
+				FDB1FB9C20CDC123007D8F3D /* Utlilities */,
+				FDB1FB9820CDC074007D8F3D /* Ressources */,
 			);
 			path = Trackr;
 			sourceTree = "<group>";
 		};
-		FDC2F37920B2D75600372E08 /* TrackrTests */ = {
+		FDC2F37920B2D75600372E08 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				FDC2F37A20B2D75600372E08 /* TrackrTests.swift */,
 				FDC2F37C20B2D75600372E08 /* Info.plist */,
 			);
-			path = TrackrTests;
+			path = Tests;
 			sourceTree = "<group>";
 		};
-		FDC2F38420B2D75600372E08 /* TrackrUITests */ = {
+		FDC2F38420B2D75600372E08 /* UITests */ = {
 			isa = PBXGroup;
 			children = (
 				FDC2F38520B2D75600372E08 /* TrackrUITests.swift */,
 				FDC2F38720B2D75600372E08 /* Info.plist */,
 			);
-			path = TrackrUITests;
+			path = UITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -544,7 +584,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = Trackr/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Trackr/Ressources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -566,7 +606,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = Trackr/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Trackr/Ressources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -26,6 +26,7 @@ extension Defaults {
 }
 
 // MARK: - specific getters
+
 extension Defaults {
 	static let getLocations: () -> [Location] = getValues(from: Defaults.locations.store)
 	static let getErrors: () -> [Error] = getValues(from: Defaults.errors.store)
@@ -38,6 +39,7 @@ extension Defaults {
 }
 
 // MARK: - generic functions
+
 extension Defaults {
 	static func getValues<T>(from store: Storage) ->
 		() -> [T] {
