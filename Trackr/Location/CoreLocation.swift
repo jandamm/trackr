@@ -1,5 +1,5 @@
 //
-//  LocationDelegate.swift
+//  CoreLocation.swift
 //  Trackr
 //
 //  Created by Jan Dammshäuser on 10.06.18.
@@ -8,15 +8,18 @@
 
 import CoreLocation
 import Foundation
+import Overture
 
-private let manager = CLLocationManager()
+typealias LocationManager = CLLocationManager
+
+private let manager = LocationManager()
 private let delegate = Location.Delegate()
 
 extension Location {
 	static let setupAndStartManager = unzurry(with(manager,
-	                                               setDelegate(delegate),
-	                                               requestAuthorization,
-	                                               startMonitoring
+	                                               toVoid(set(\LocationManager.delegate, delegate)),
+	                                               flurry(LocationManager.requestAlwaysAuthorization),
+	                                               flurry(LocationManager.startMonitoringSignificantLocationChanges)
 	))
 }
 
