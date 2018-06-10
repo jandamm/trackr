@@ -1,5 +1,5 @@
 //
-//  Location.swift
+//  Track.swift
 //  Trackr
 //
 //  Created by Jan Dammshäuser on 21.05.18.
@@ -10,13 +10,13 @@ import CoreLocation
 import Foundation
 import Overture
 
-struct Location {
+struct Track {
 	let date: Date
 	let location: CLLocationCoordinate2D
 	let altitude: Double
 }
 
-extension Location: CustomStringConvertible {
+extension Track: CustomStringConvertible {
 	var description: String {
 		let dateString = timeFormatter.string(from: date)
 		let lon = numberFormatter.string(from: location.longitude as NSNumber)
@@ -25,17 +25,17 @@ extension Location: CustomStringConvertible {
 	}
 }
 
-extension Location: Comparable {
-	static func < (lhs: Location, rhs: Location) -> Bool {
+extension Track: Comparable {
+	static func < (lhs: Track, rhs: Track) -> Bool {
 		return lhs.date < rhs.date
 	}
 
-	static func == (lhs: Location, rhs: Location) -> Bool {
+	static func == (lhs: Track, rhs: Track) -> Bool {
 		return lhs.date == rhs.date
 	}
 }
 
-extension Location {
+extension Track {
 	typealias Index = Labelled<Date, String>
 
 	func index() -> Index {
@@ -64,8 +64,8 @@ private let numberFormatter = { () -> NumberFormatter in
 }()
 
 // TODO: nicer composing
-let indexLocation = zurry(flip(Location.index))
-let groupLocations = reduce(group(by: indexLocation))([Location.Index: [Location]]())
+let indexLocation = zurry(flip(Track.index))
+let groupLocations = reduce(group(by: indexLocation))([Track.Index: [Track]]())
 
 func optional<A>(_ f: @escaping (A, A) -> Bool) ->
 	(A?, A?) -> Bool {
@@ -79,7 +79,7 @@ func optional<A>(_ f: @escaping (A, A) -> Bool) ->
 	}
 }
 
-func isEqualLocation(_ location1: Location, _ location2: Location) -> Bool {
+func isEqualLocation(_ location1: Track, _ location2: Track) -> Bool {
 	guard equal(^\.altitude)(location1, location2) else { return false }
 	guard equal(^\.location.longitude)(location1, location2) else { return false }
 	guard equal(^\.location.latitude)(location1, location2) else { return false }

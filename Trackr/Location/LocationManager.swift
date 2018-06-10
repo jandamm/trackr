@@ -9,6 +9,7 @@
 import CoreLocation
 import Foundation
 
+
 class LocationManager: NSObject, CLLocationManagerDelegate {
 	static let shared = LocationManager()
 	let locationManager: CLLocationManager
@@ -32,7 +33,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
 
 		var hasUpdates = false
 		locations.forEach { clLocation in
-			let location = Location(date: clLocation.timestamp, location: clLocation.coordinate, altitude: clLocation.altitude)
+			let location = Track(date: clLocation.timestamp, location: clLocation.coordinate, altitude: clLocation.altitude)
 			guard !optional(isEqualLocation)(location, lastLocation) else {
 				return
 			}

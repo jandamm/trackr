@@ -20,7 +20,7 @@
 		FDC2F38620B2D75600372E08 /* TrackrUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC2F38520B2D75600372E08 /* TrackrUITests.swift */; };
 		FDC2F39720B2E53500372E08 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDC2F39620B2E53500372E08 /* SQLite.framework */; };
 		FDC2F39B20B2EAD900372E08 /* SQLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC2F39A20B2EAD900372E08 /* SQLite.swift */; };
-		FDC2F39D20B2F0A100372E08 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC2F39C20B2F0A100372E08 /* Location.swift */; };
+		FDC2F39D20B2F0A100372E08 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC2F39C20B2F0A100372E08 /* Track.swift */; };
 		FDC2F39F20B3028900372E08 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC2F39E20B3028900372E08 /* LocationManager.swift */; };
 		FDCADB4120BD6D0200694372 /* GenericFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCADB4020BD6D0200694372 /* GenericFunc.swift */; };
 		FDD4569B20B9F69D00D47D6F /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD4569A20B9F69D00D47D6F /* Defaults.swift */; };
@@ -65,7 +65,7 @@
 		FDC2F38720B2D75600372E08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FDC2F39620B2E53500372E08 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/iOS/SQLite.framework; sourceTree = "<group>"; };
 		FDC2F39A20B2EAD900372E08 /* SQLite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLite.swift; sourceTree = "<group>"; };
-		FDC2F39C20B2F0A100372E08 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		FDC2F39C20B2F0A100372E08 /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		FDC2F39E20B3028900372E08 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		FDCADB4020BD6D0200694372 /* GenericFunc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericFunc.swift; sourceTree = "<group>"; };
 		FDD4569A20B9F69D00D47D6F /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
@@ -106,7 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				FDB1FB9120CD4771007D8F3D /* Address.swift */,
-				FDC2F39C20B2F0A100372E08 /* Location.swift */,
+				FDC2F39C20B2F0A100372E08 /* Track.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -403,7 +403,7 @@
 				FDB1FB9220CD4771007D8F3D /* Address.swift in Sources */,
 				FDB1FB8F20CD3FDE007D8F3D /* GeoCoder.swift in Sources */,
 				FDC2F39F20B3028900372E08 /* LocationManager.swift in Sources */,
-				FDC2F39D20B2F0A100372E08 /* Location.swift in Sources */,
+				FDC2F39D20B2F0A100372E08 /* Track.swift in Sources */,
 				FDC2F36620B2D75400372E08 /* AppDelegate.swift in Sources */,
 				FDFA8B8820BFCCA600F45F55 /* Operators.swift in Sources */,
 			);

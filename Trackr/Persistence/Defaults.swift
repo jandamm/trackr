@@ -28,10 +28,10 @@ extension Defaults {
 // MARK: - specific getters
 
 extension Defaults {
-	static let getLocations: () -> [Location] = getValues(from: Defaults.locations.store)
+	static let getLocations: () -> [Track] = getValues(from: Defaults.locations.store)
 	static let getErrors: () -> [Error] = getValues(from: Defaults.errors.store)
 
-	static let appendLocation: (Location) -> Void = appendValue(in: Defaults.locations.store)
+	static let appendLocation: (Track) -> Void = appendValue(in: Defaults.locations.store)
 	static let appendError: (Error) -> Void = appendValue(in: Defaults.errors.store)
 
 	static let deleteLocations: () -> Void = deleteValues(from: Defaults.locations.store)

@@ -11,8 +11,8 @@ import Overture
 import UIKit
 
 class ListViewController: UIViewController {
-	private var sections: [Location.Index] = []
-	private var data: [Location.Index: [Location]] = [:] {
+	private var sections: [Track.Index] = []
+	private var data: [Track.Index: [Track]] = [:] {
 		didSet { sections = data.keys.sorted(by: greater(^\.base)) }
 	}
 

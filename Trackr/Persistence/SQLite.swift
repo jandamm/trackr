@@ -34,17 +34,17 @@ class SQLiteWrapper {
 		})
 	}
 
-	static func add(_ l: Location) throws {
+	static func add(_ l: Track) throws {
 		let insert = location.insert(date <- l.date.timeIntervalSince1970, lon <- l.location.longitude, lat <- l.location.latitude, alt <- l.altitude)
 		_ = try db.run(insert)
 	}
 
-	static func remove(_ l: Location) throws {
+	static func remove(_ l: Track) throws {
 		let entry = location.filter(date == l.date.timeIntervalSince1970)
 		try db.run(entry.delete())
 	}
 
-	static func getLastLocation() throws -> Location {
+	static func getLastLocation() throws -> Track {
 		let filteredTable = location.order(date.desc)
 			.limit(1)
 		let rowList = try db.prepare(filteredTable).map(rowMapper)
@@ -55,19 +55,19 @@ class SQLiteWrapper {
 		return firstEntry
 	}
 
-	static func getLocations() throws -> [Location] {
+	static func getLocations() throws -> [Track] {
 		return try db.prepare(location).map(rowMapper)
 	}
 }
 
-private func rowMapper(_ row: Row) -> Location {
+private func rowMapper(_ row: Row) -> Track {
 	let date = row[SQLiteWrapper.date]
 	let lon = row[SQLiteWrapper.lon]
 	let lat = row[SQLiteWrapper.lat]
 	let alt = row[SQLiteWrapper.alt]
-	return Location(date: Date(timeIntervalSince1970: date),
-	                location: CLLocationCoordinate2D(latitude: lat, longitude: lon),
-	                altitude: alt
+	return Track(date: Date(timeIntervalSince1970: date),
+	             location: CLLocationCoordinate2D(latitude: lat, longitude: lon),
+	             altitude: alt
 	)
 }
 
