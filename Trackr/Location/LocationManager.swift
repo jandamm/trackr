@@ -9,46 +9,27 @@
 import CoreLocation
 import Foundation
 
+protocol LocationManager: AnyObject {
+	var delegate: CLLocationManagerDelegate? { get set }
+	func requestAlwaysAuthorization()
+	func startMonitoringSignificantLocationChanges()
+}
 
-class LocationManager: NSObject, CLLocationManagerDelegate {
-	static let shared = LocationManager()
-	let locationManager: CLLocationManager
+extension CLLocationManager: LocationManager {}
 
-	override init() {
-		locationManager = CLLocationManager()
-		super.init()
+// MARK: - generic base functions
 
-		locationManager.delegate = self
+extension Location {
+	static func setDelegate(_ delegate: Delegate) ->
+		(_ manager: LocationManager) -> Void {
+		return { manager in manager.delegate = delegate }
 	}
 
-	func start() {
-		locationManager.requestAlwaysAuthorization()
-		locationManager.startMonitoringSignificantLocationChanges()
+	static func requestAuthorization(_ manager: LocationManager) {
+		manager.requestAlwaysAuthorization()
 	}
 
-	func locationManager(_: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-		guard locations.count > 0 else { return }
-
-		let lastLocation = try? SQLiteWrapper.getLastLocation()
-
-		var hasUpdates = false
-		locations.forEach { clLocation in
-			let location = Track(date: clLocation.timestamp, location: clLocation.coordinate, altitude: clLocation.altitude)
-			guard !optional(isEqualLocation)(location, lastLocation) else {
-				return
-			}
-
-			do {
-				try SQLiteWrapper.add(location)
-				hasUpdates = true
-			} catch {
-				Defaults.appendError(error)
-				Defaults.appendLocation(location)
-				sendNotification("Please open Trackr", body: String(describing: error))
-			}
-		}
-
-		guard hasUpdates else { return }
-		NotificationCenter.default.post(name: NSNotification.Name("Update"), object: nil)
+	static func startMonitoring(_ manager: LocationManager) {
+		manager.startMonitoringSignificantLocationChanges()
 	}
 }

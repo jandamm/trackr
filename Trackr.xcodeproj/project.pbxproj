@@ -11,6 +11,8 @@
 		FDB1FB8F20CD3FDE007D8F3D /* GeoCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB1FB8E20CD3FDE007D8F3D /* GeoCoder.swift */; };
 		FDB1FB9220CD4771007D8F3D /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB1FB9120CD4771007D8F3D /* Address.swift */; };
 		FDB1FB9520CDBBFD007D8F3D /* UserDefaultsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB1FB9420CDBBFD007D8F3D /* UserDefaultsProtocol.swift */; };
+		FDB1FBA020CDC66C007D8F3D /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB1FB9F20CDC66C007D8F3D /* Location.swift */; };
+		FDB1FBA220CDCD85007D8F3D /* LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB1FBA120CDCD85007D8F3D /* LocationDelegate.swift */; };
 		FDC2F36620B2D75400372E08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC2F36520B2D75400372E08 /* AppDelegate.swift */; };
 		FDC2F36820B2D75400372E08 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC2F36720B2D75400372E08 /* ListViewController.swift */; };
 		FDC2F36B20B2D75400372E08 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDC2F36920B2D75400372E08 /* Main.storyboard */; };
@@ -50,6 +52,8 @@
 		FDB1FB8E20CD3FDE007D8F3D /* GeoCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoCoder.swift; sourceTree = "<group>"; };
 		FDB1FB9120CD4771007D8F3D /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		FDB1FB9420CDBBFD007D8F3D /* UserDefaultsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsProtocol.swift; sourceTree = "<group>"; };
+		FDB1FB9F20CDC66C007D8F3D /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		FDB1FBA120CDCD85007D8F3D /* LocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDelegate.swift; sourceTree = "<group>"; };
 		FDC2F36220B2D75400372E08 /* Trackr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trackr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDC2F36520B2D75400372E08 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FDC2F36720B2D75400372E08 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
@@ -134,6 +138,8 @@
 		FDB1FB9920CDC098007D8F3D /* Location */ = {
 			isa = PBXGroup;
 			children = (
+				FDB1FB9F20CDC66C007D8F3D /* Location.swift */,
+				FDB1FBA120CDCD85007D8F3D /* LocationDelegate.swift */,
 				FDC2F39E20B3028900372E08 /* LocationManager.swift */,
 				FDB1FB8E20CD3FDE007D8F3D /* GeoCoder.swift */,
 			);
@@ -397,8 +403,10 @@
 				FDC2F36820B2D75400372E08 /* ListViewController.swift in Sources */,
 				FDCADB4120BD6D0200694372 /* GenericFunc.swift in Sources */,
 				FDC2F39B20B2EAD900372E08 /* SQLite.swift in Sources */,
+				FDB1FBA220CDCD85007D8F3D /* LocationDelegate.swift in Sources */,
 				FDB1FB9520CDBBFD007D8F3D /* UserDefaultsProtocol.swift in Sources */,
 				FDFA8B8A20BFCE6C00F45F55 /* Labelled.swift in Sources */,
+				FDB1FBA020CDC66C007D8F3D /* Location.swift in Sources */,
 				FDD4569B20B9F69D00D47D6F /* Defaults.swift in Sources */,
 				FDB1FB9220CD4771007D8F3D /* Address.swift in Sources */,
 				FDB1FB8F20CD3FDE007D8F3D /* GeoCoder.swift in Sources */,

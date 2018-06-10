@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// Override point for customization after application launch.
 
 		try! SQLiteWrapper.setup()
-		LocationManager.shared.start()
+		Location.setupAndStartManager()
 		requestNotificationAllowance()
 
 		resetNotifications()
