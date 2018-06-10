@@ -116,6 +116,7 @@
 			children = (
 				FDB1FB9420CDBBFD007D8F3D /* UserDefaultsProtocol.swift */,
 				FDD4569A20B9F69D00D47D6F /* Defaults.swift */,
+				FDC2F39A20B2EAD900372E08 /* SQLite.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -153,7 +154,6 @@
 				FDC2F36C20B2D75600372E08 /* Assets.xcassets */,
 				FDC2F36E20B2D75600372E08 /* LaunchScreen.storyboard */,
 				FDC2F37120B2D75600372E08 /* Info.plist */,
-				FDC2F39A20B2EAD900372E08 /* SQLite.swift */,
 				FDC2F39E20B3028900372E08 /* LocationManager.swift */,
 				FDD4569C20BB0F8A00D47D6F /* Notifications.swift */,
 				FDCADB4020BD6D0200694372 /* GenericFunc.swift */,
