@@ -13,7 +13,7 @@ class SQLiteWrapper {
 	private static var db: Connection!
 	private static var location: Table!
 
-	static let date = Expression<Double>("date")
+	static let dat = Expression<Double>("date")
 	static let lon = Expression<Double>("lon")
 	static let lat = Expression<Double>("lat")
 	static let alt = Expression<Double>("alt")
@@ -27,7 +27,7 @@ class SQLiteWrapper {
 		location = Table("location")
 
 		try db.run(location.create(ifNotExists: true) { t in
-			t.column(date, unique: true)
+			t.column(dat, unique: true)
 			t.column(lon)
 			t.column(lat)
 			t.column(alt)
@@ -35,17 +35,17 @@ class SQLiteWrapper {
 	}
 
 	static func add(_ t: Track) throws {
-		let insert = location.insert(date <- t.date.timeIntervalSince1970, lon <- t.location.longitude, lat <- t.location.latitude, alt <- t.altitude)
+		let insert = location.insert(dat <- t.date.timeIntervalSince1970, lon <- t.location.longitude, lat <- t.location.latitude, alt <- t.altitude)
 		_ = try db.run(insert)
 	}
 
 	static func remove(_ t: Track) throws {
-		let entry = location.filter(date == t.date.timeIntervalSince1970)
+		let entry = location.filter(dat == t.date.timeIntervalSince1970)
 		try db.run(entry.delete())
 	}
 
 	static func getLastTrack() throws -> Track {
-		let filteredTable = location.order(date.desc)
+		let filteredTable = location.order(dat.desc)
 			.limit(1)
 		let rowList = try db.prepare(filteredTable).map(rowMapper)
 
@@ -61,7 +61,7 @@ class SQLiteWrapper {
 }
 
 private func rowMapper(_ row: Row) -> Track {
-	let date = row[SQLiteWrapper.date]
+	let date = row[SQLiteWrapper.dat]
 	let lon = row[SQLiteWrapper.lon]
 	let lat = row[SQLiteWrapper.lat]
 	let alt = row[SQLiteWrapper.alt]
