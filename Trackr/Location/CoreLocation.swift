@@ -20,7 +20,8 @@ extension Location {
 	                                               toVoid(set(\LocationManager.delegate, delegate)),
 	                                               toVoid(set(\LocationManager.desiredAccuracy, desiredAccuracy)),
 	                                               flurry(LocationManager.requestAlwaysAuthorization),
-	                                               flurry(LocationManager.startMonitoringSignificantLocationChanges)
+	                                               flurry(LocationManager.startMonitoringSignificantLocationChanges),
+	                                               flurry(LocationManager.startMonitoringVisits)
 	))
 }
 
@@ -28,6 +29,10 @@ extension Location {
 	class Delegate: NSObject, CLLocationManagerDelegate {
 		func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 			Location.updateLocations(locations, from: manager)
+		}
+
+		func locationManager(_ manager: CLLocationManager, didVisit visit: CLVisit) {
+			Location.updateVisit(visit, from: manager)
 		}
 	}
 }

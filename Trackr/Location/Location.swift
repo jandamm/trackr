@@ -30,17 +30,31 @@ extension Location {
 				return
 			}
 
-			do {
-				try SQLiteWrapper.add(track)
+			if save(track: track) {
 				hasUpdates = true
-			} catch {
-				Defaults.appendError(error)
-				Defaults.appendTrack(track)
-				sendNotification("Please open Trackr", body: String(describing: error))
 			}
 		}
 
 		guard hasUpdates else { return }
 		NotificationCenter.default.post(name: NSNotification.Name("Update"), object: nil)
+	}
+
+	// TODO: add nicer storing and validation
+	static func updateVisit(_ visit: CLVisit, from _: LocationManager) {
+		let track = Track(date: visit.arrivalDate, location: visit.coordinate, altitude: 0)
+		save(track: track)
+	}
+
+	// TODO: refactor!
+	@discardableResult private static func save(track: Track) -> Bool {
+		do {
+			try SQLiteWrapper.add(track)
+			return true
+		} catch {
+			Defaults.appendError(error)
+			Defaults.appendTrack(track)
+			sendNotification("Please open Trackr", body: String(describing: error))
+			return false
+		}
 	}
 }
