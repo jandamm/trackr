@@ -7,6 +7,19 @@
 //
 
 import Foundation
+import Overture
+
+func with<A: NSObject>(_ a: A, _ fs: ((A) -> Void)...) {
+	fs.forEach { f in f(a) }
+}
+
+func unzurry<A>(_ a: A) -> () -> A {
+	return { a }
+}
+
+func flurry<A, B>(_ f: @escaping (A) -> () -> B) -> (A) -> B {
+	return zurry(flip(f))
+}
 
 func reduce<Result, A>(_ f: @escaping (Result, A) -> Result) ->
 	(_ initialResult: Result) ->
@@ -59,5 +72,12 @@ func match<A, B>(_ f: @escaping () -> B) ->
 	(A) -> B {
 	return { _ in
 		f()
+	}
+}
+
+func toVoid<A, B>(_ f: @escaping (A) -> B) ->
+	(A) -> Void {
+	return { a in
+		_ = f(a)
 	}
 }

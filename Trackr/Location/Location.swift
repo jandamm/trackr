@@ -1,38 +1,25 @@
 //
-//  LocationManager.swift
+//  Location.swift
 //  Trackr
 //
-//  Created by Jan Dammshäuser on 21.05.18.
+//  Created by Jan Dammshäuser on 10.06.18.
 //  Copyright © 2018 Jan Dammshäuser. All rights reserved.
 //
 
 import CoreLocation
 import Foundation
 
-class LocationManager: NSObject, CLLocationManagerDelegate {
-	static let shared = LocationManager()
-	let locationManager: CLLocationManager
+enum Location {}
 
-	override init() {
-		locationManager = CLLocationManager()
-		super.init()
-
-		locationManager.delegate = self
-	}
-
-	func start() {
-		locationManager.requestAlwaysAuthorization()
-		locationManager.startMonitoringSignificantLocationChanges()
-	}
-
-	func locationManager(_: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+extension Location {
+	static func updateLocations(_ locations: [CLLocation], from _: LocationManager) {
 		guard locations.count > 0 else { return }
 
 		let lastLocation = try? SQLiteWrapper.getLastLocation()
 
 		var hasUpdates = false
 		locations.forEach { clLocation in
-			let location = Location(date: clLocation.timestamp, location: clLocation.coordinate, altitude: clLocation.altitude)
+			let location = Track(date: clLocation.timestamp, location: clLocation.coordinate, altitude: clLocation.altitude)
 			guard !optional(isEqualLocation)(location, lastLocation) else {
 				return
 			}
