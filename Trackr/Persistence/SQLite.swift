@@ -7,6 +7,7 @@
 //
 
 import CoreLocation
+import Overture
 import SQLite
 
 class SQLiteWrapper {
@@ -45,11 +46,30 @@ class SQLiteWrapper {
 	}
 
 	static func getLastTrack() throws -> Track {
-		let filteredTable = location.order(dat.desc)
-			.limit(1)
-		let rowList = try db.prepare(filteredTable).map(rowMapper)
+		return try with(
+			location
+				.order(dat.desc)
+				.limit(1),
+			getFirstTrackOfTable
+		)
+	}
 
-		guard let firstEntry = rowList.first else {
+	static func getTrack(forDate date: Date) throws -> Track {
+		return try with(
+			location
+				.filter(dat == date.timeIntervalSince1970),
+			getFirstTrackOfTable
+		)
+	}
+
+	private static let getFirstTrackOfTable = pipe(getTracksOf, getFirstTrack)
+
+	private static func getTracksOf(_ table: Table) throws -> [Track] {
+		return try db.prepare(table).map(rowMapper)
+	}
+
+	private static func getFirstTrack(of tracks: [Track]) throws -> Track {
+		guard let firstEntry = tracks.first else {
 			throw SQLError("No Entry")
 		}
 		return firstEntry
