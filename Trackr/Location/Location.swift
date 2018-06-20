@@ -8,6 +8,7 @@
 
 import CoreLocation
 import Foundation
+import Overture
 
 enum Location {
 	static let desiredAccuracy: CLLocationAccuracy = 50
@@ -41,7 +42,17 @@ extension Location {
 
 	// TODO: add nicer storing and validation
 	static func updateVisit(_ visit: CLVisit, from _: LocationManager) {
-		let track = Track(date: visit.arrivalDate, location: visit.coordinate, altitude: 0)
+		saveVisit(visit, forDate: pipe(^\.arrivalDate, { $0 != Date.distantPast ? $0 : nil }))
+		saveVisit(visit, forDate: pipe(^\.departureDate, { $0 != Date.distantFuture ? $0 : nil }))
+	}
+
+	private static func saveVisit(_ visit: CLVisit, forDate converter: (CLVisit) -> Date?) {
+		guard let date = converter(visit) else { return }
+		let track = Track(date: date, location: visit.coordinate, altitude: 0)
+		let sameTimeTrack = try? SQLiteWrapper.getTrack(forDate: date)
+		guard track != sameTimeTrack else {
+			return
+		}
 		save(track: track)
 	}
 
