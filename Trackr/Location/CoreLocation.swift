@@ -34,5 +34,9 @@ extension Location {
 		func locationManager(_ manager: CLLocationManager, didVisit visit: CLVisit) {
 			Location.updateVisit(visit, from: manager)
 		}
+
+		func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+			Location.updateError(error, from: manager)
+		}
 	}
 }

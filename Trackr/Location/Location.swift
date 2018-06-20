@@ -40,6 +40,10 @@ extension Location {
 		NotificationCenter.default.post(name: NSNotification.Name("Update"), object: nil)
 	}
 
+	static func updateError(_ error: Error, from _: LocationManager) {
+		handleError(error)
+	}
+
 	// TODO: add nicer storing and validation
 	static func updateVisit(_ visit: CLVisit, from _: LocationManager) {
 		let unequalTo: (Date) -> (Date) -> Bool = curry(
@@ -69,15 +73,19 @@ extension Location {
 		save(track: track)
 	}
 
+	private static func handleError(_ error: Error) {
+		Defaults.appendError(error)
+		sendNotification("Please open Trackr", body: String(describing: error))
+	}
+
 	// TODO: refactor!
 	@discardableResult private static func save(track: Track) -> Bool {
 		do {
 			try SQLiteWrapper.add(track)
 			return true
 		} catch {
-			Defaults.appendError(error)
 			Defaults.appendTrack(track)
-			sendNotification("Please open Trackr", body: String(describing: error))
+			handleError(error)
 			return false
 		}
 	}
