@@ -10,6 +10,7 @@ import Foundation
 
 protocol UserDefaultsProtocol {
 	func array(forKey key: String) -> [Any]?
+	func object(forKey key: String) -> Any?
 	func set(_ value: Any?, forKey key: String)
 	func removeObject(forKey key: String)
 }

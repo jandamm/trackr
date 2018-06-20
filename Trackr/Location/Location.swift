@@ -16,6 +16,15 @@ enum Location {
 
 extension Location {
 	static func updateLocations(_ locations: [CLLocation], from locationManager: LocationManager) {
+		guard let lastLocation = locations.last else { return }
+
+		// TODO: nicer filter for slcLocations
+		if let slcLocation = lastLocation.speed == -1 ? lastLocation : nil {
+			guard slcLocation.timestamp != Defaults.getLastSLCDate() else { return }
+
+			Defaults.setLastSLCDate(slcLocation.timestamp)
+		}
+
 		let validLocations = locations.filter { $0.horizontalAccuracy <= desiredAccuracy }
 		guard !validLocations.isEmpty else {
 			locationManager.requestLocation()
