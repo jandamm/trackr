@@ -9,27 +9,33 @@
 import CoreLocation
 import Foundation
 
-enum Location {}
+enum Location {
+	static let desiredAccuracy: CLLocationAccuracy = 50
+}
 
 extension Location {
-	static func updateLocations(_ locations: [CLLocation], from _: LocationManager) {
-		guard locations.count > 0 else { return }
+	static func updateLocations(_ locations: [CLLocation], from locationManager: LocationManager) {
+		let validLocations = locations.filter { $0.horizontalAccuracy <= desiredAccuracy }
+		guard !validLocations.isEmpty else {
+			locationManager.requestLocation()
+			return
+		}
 
-		let lastLocation = try? SQLiteWrapper.getLastLocation()
+		let lastTrack = try? SQLiteWrapper.getLastTrack()
 
 		var hasUpdates = false
-		locations.forEach { clLocation in
-			let location = Track(date: clLocation.timestamp, location: clLocation.coordinate, altitude: clLocation.altitude)
-			guard !optional(isEqualLocation)(location, lastLocation) else {
+		validLocations.forEach { location in
+			let track = Track(date: location.timestamp, location: location.coordinate, altitude: location.altitude)
+			guard track != lastTrack else {
 				return
 			}
 
 			do {
-				try SQLiteWrapper.add(location)
+				try SQLiteWrapper.add(track)
 				hasUpdates = true
 			} catch {
 				Defaults.appendError(error)
-				Defaults.appendTrack(location)
+				Defaults.appendTrack(track)
 				sendNotification("Please open Trackr", body: String(describing: error))
 			}
 		}

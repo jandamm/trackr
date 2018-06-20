@@ -18,6 +18,7 @@ private let delegate = Location.Delegate()
 extension Location {
 	static let setupAndStartManager = unzurry(with(manager,
 	                                               toVoid(set(\LocationManager.delegate, delegate)),
+	                                               toVoid(set(\LocationManager.desiredAccuracy, desiredAccuracy)),
 	                                               flurry(LocationManager.requestAlwaysAuthorization),
 	                                               flurry(LocationManager.startMonitoringSignificantLocationChanges)
 	))
