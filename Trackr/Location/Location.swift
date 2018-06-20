@@ -29,7 +29,7 @@ extension Location {
 				hasUpdates = true
 			} catch {
 				Defaults.appendError(error)
-				Defaults.appendLocation(location)
+				Defaults.appendTrack(location)
 				sendNotification("Please open Trackr", body: String(describing: error))
 			}
 		}

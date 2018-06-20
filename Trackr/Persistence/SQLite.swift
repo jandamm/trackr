@@ -34,17 +34,17 @@ class SQLiteWrapper {
 		})
 	}
 
-	static func add(_ l: Track) throws {
-		let insert = location.insert(date <- l.date.timeIntervalSince1970, lon <- l.location.longitude, lat <- l.location.latitude, alt <- l.altitude)
+	static func add(_ t: Track) throws {
+		let insert = location.insert(date <- t.date.timeIntervalSince1970, lon <- t.location.longitude, lat <- t.location.latitude, alt <- t.altitude)
 		_ = try db.run(insert)
 	}
 
-	static func remove(_ l: Track) throws {
-		let entry = location.filter(date == l.date.timeIntervalSince1970)
+	static func remove(_ t: Track) throws {
+		let entry = location.filter(date == t.date.timeIntervalSince1970)
 		try db.run(entry.delete())
 	}
 
-	static func getLastLocation() throws -> Track {
+	static func getLastTrack() throws -> Track {
 		let filteredTable = location.order(date.desc)
 			.limit(1)
 		let rowList = try db.prepare(filteredTable).map(rowMapper)

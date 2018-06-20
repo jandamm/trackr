@@ -57,9 +57,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	private func addLocations() {
 		do {
-			try Defaults.getLocations()
+			try Defaults.getTracks()
 				.forEach(SQLiteWrapper.add)
-			Defaults.deleteLocations()
+			Defaults.deleteTracks()
 			reloadTable()
 		} catch {
 			print(error)

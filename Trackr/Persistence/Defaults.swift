@@ -9,7 +9,7 @@
 import Foundation
 
 enum Defaults {
-	case errors, locations
+	case errors, tracks
 }
 
 extension Defaults {
@@ -19,8 +19,8 @@ extension Defaults {
 		switch self {
 		case .errors:
 			return (UserDefaults.standard, "errors")
-		case .locations:
-			return (UserDefaults.standard, "locations")
+		case .tracks:
+			return (UserDefaults.standard, "tracks")
 		}
 	}
 }
@@ -28,13 +28,13 @@ extension Defaults {
 // MARK: - specific getters
 
 extension Defaults {
-	static let getLocations: () -> [Track] = getValues(from: Defaults.locations.store)
+	static let getTracks: () -> [Track] = getValues(from: Defaults.tracks.store)
 	static let getErrors: () -> [Error] = getValues(from: Defaults.errors.store)
 
-	static let appendLocation: (Track) -> Void = appendValue(in: Defaults.locations.store)
+	static let appendTrack: (Track) -> Void = appendValue(in: Defaults.tracks.store)
 	static let appendError: (Error) -> Void = appendValue(in: Defaults.errors.store)
 
-	static let deleteLocations: () -> Void = deleteValues(from: Defaults.locations.store)
+	static let deleteTracks: () -> Void = deleteValues(from: Defaults.tracks.store)
 	static let deleteErrors: () -> Void = deleteValues(from: Defaults.errors.store)
 }
 
