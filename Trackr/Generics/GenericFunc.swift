@@ -17,6 +17,12 @@ func unzurry<A>(_ a: A) -> () -> A {
 	return { a }
 }
 
+func validate<A>(_ f: @escaping (A) -> Bool) -> (A) -> A? {
+	return { a in
+		f(a) ? a : nil
+	}
+}
+
 func flurry<A, B>(_ f: @escaping (A) -> () -> B) -> (A) -> B {
 	return zurry(flip(f))
 }

@@ -42,8 +42,21 @@ extension Location {
 
 	// TODO: add nicer storing and validation
 	static func updateVisit(_ visit: CLVisit, from _: LocationManager) {
-		saveVisit(visit, forDate: pipe(^\.arrivalDate, { $0 != Date.distantPast ? $0 : nil }))
-		saveVisit(visit, forDate: pipe(^\.departureDate, { $0 != Date.distantFuture ? $0 : nil }))
+		let unequalTo: (Date) -> (Date) -> Bool = curry(
+			!=
+		)
+
+		saveVisit(visit, forDate:
+			pipe(^\.arrivalDate,
+			     validate(unequalTo(Date.distantPast))
+			)
+		)
+
+		saveVisit(visit, forDate:
+			pipe(^\.departureDate,
+			     validate(unequalTo(Date.distantFuture))
+			)
+		)
 	}
 
 	private static func saveVisit(_ visit: CLVisit, forDate converter: (CLVisit) -> Date?) {
