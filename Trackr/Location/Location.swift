@@ -26,7 +26,7 @@ extension Location {
 
 		var hasUpdates = false
 		validLocations.forEach { location in
-			let track = Track(date: location.timestamp, location: location.coordinate, altitude: location.altitude)
+			let track = Track(date: location.timestamp, location: location.coordinate, altitude: location.altitude, source: .change)
 			guard track != lastTrack else {
 				return
 			}
@@ -65,7 +65,7 @@ extension Location {
 
 	private static func saveVisit(_ visit: CLVisit, forDate converter: (CLVisit) -> Date?) {
 		guard let date = converter(visit) else { return }
-		let track = Track(date: date, location: visit.coordinate, altitude: 0)
+		let track = Track(date: date, location: visit.coordinate, altitude: 0, source: .visit)
 		let sameTimeTrack = try? SQLiteWrapper.getTrack(forDate: date)
 		guard track != sameTimeTrack else {
 			return

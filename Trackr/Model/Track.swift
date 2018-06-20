@@ -14,6 +14,13 @@ struct Track {
 	let date: Date
 	let location: CLLocationCoordinate2D
 	let altitude: Double
+	let source: Source
+}
+
+extension Track {
+	enum Source: String {
+		case region, visit, change
+	}
 }
 
 extension Track: CustomStringConvertible {

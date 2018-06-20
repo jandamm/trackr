@@ -18,6 +18,7 @@ class SQLiteWrapper {
 	static let lon = Expression<Double>("lon")
 	static let lat = Expression<Double>("lat")
 	static let alt = Expression<Double>("alt")
+	static let src = Expression<String>("source")
 
 	static func setup() throws {
 		let path = NSSearchPathForDirectoriesInDomains(
@@ -32,11 +33,12 @@ class SQLiteWrapper {
 			t.column(lon)
 			t.column(lat)
 			t.column(alt)
+			t.column(src)
 		})
 	}
 
 	static func add(_ t: Track) throws {
-		let insert = location.insert(dat <- t.date.timeIntervalSince1970, lon <- t.location.longitude, lat <- t.location.latitude, alt <- t.altitude)
+		let insert = location.insert(dat <- t.date.timeIntervalSince1970, lon <- t.location.longitude, lat <- t.location.latitude, alt <- t.altitude, src <- t.source.rawValue)
 		_ = try db.run(insert)
 	}
 
@@ -85,9 +87,11 @@ private func rowMapper(_ row: Row) -> Track {
 	let lon = row[SQLiteWrapper.lon]
 	let lat = row[SQLiteWrapper.lat]
 	let alt = row[SQLiteWrapper.alt]
+	let src = Track.Source(rawValue: row[SQLiteWrapper.src]) ?? .change
 	return Track(date: Date(timeIntervalSince1970: date),
 	             location: CLLocationCoordinate2D(latitude: lat, longitude: lon),
-	             altitude: alt
+	             altitude: alt,
+	             source: src
 	)
 }
 
