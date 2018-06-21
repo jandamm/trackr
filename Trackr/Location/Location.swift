@@ -11,7 +11,7 @@ import Foundation
 import Overture
 
 enum Location {
-	static let desiredAccuracy: CLLocationAccuracy = 50
+	static let desiredAccuracy: CLLocationAccuracy = 100
 }
 
 extension Location {
