@@ -64,8 +64,15 @@ extension ListViewController: UITableViewDataSource {
 
 		let section = sections[indexPath.section]
 		guard let sectionData = data[section] else { return cell }
+		let track = sectionData[indexPath.row]
 
-		cell.textLabel?.text = String(describing: sectionData[indexPath.row])
+		cell.textLabel?.text = String(describing: track)
+		switch track.source {
+		case .change:
+			cell.backgroundColor = .white
+		default:
+			cell.backgroundColor = .lightGray
+		}
 		return cell
 	}
 }
