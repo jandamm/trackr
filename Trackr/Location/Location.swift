@@ -40,7 +40,8 @@ extension Location {
 		var hasUpdates = false
 		validLocations.forEach { location in
 			let track = Track(date: location.timestamp, location: location.coordinate, altitude: location.altitude, source: .change)
-			guard track != lastTrack else {
+			guard !optional(isEqualLocation)(track, lastTrack) &&
+				!optional(equal(^\Track.date))(track, lastTrack) else {
 				return
 			}
 
