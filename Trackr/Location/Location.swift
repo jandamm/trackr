@@ -22,7 +22,11 @@ extension Location {
 		if let slcLocation = lastLocation.speed == -1 ? lastLocation : nil {
 			guard slcLocation.timestamp != Defaults.getLastSLCDate() else { return }
 
-			Defaults.setLastSLCDate(slcLocation.timestamp)
+			// only save if older than 10 seconds.
+			// still not perfect as this also triggers twice per SLC location.
+			if slcLocation.timestamp.timeIntervalSinceNow < -10 {
+				Defaults.setLastSLCDate(slcLocation.timestamp)
+			}
 		}
 
 		let validLocations = locations.filter { $0.horizontalAccuracy <= desiredAccuracy }
