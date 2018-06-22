@@ -18,6 +18,7 @@ class ListViewController: UIViewController {
 	}
 
 	private var observer: NSObjectProtocol!
+	private var annotations: [IndexPath: MKAnnotation] = [:]
 	@IBOutlet private var mapView: MKMapView!
 	@IBOutlet private var tableView: UITableView!
 
@@ -73,6 +74,25 @@ extension ListViewController: UITableViewDataSource {
 }
 
 extension ListViewController: UITableViewDelegate {
+	func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let section = sections[indexPath.section]
+		let selection = data[section]![indexPath.row]
+
+		guard annotations[indexPath] == nil else { return }
+		let annotation = MKPointAnnotation()
+		annotations[indexPath] = annotation
+		mapView.addAnnotation(annotation)
+		annotation.coordinate = selection.location
+
+		let camera = MKMapCamera(lookingAtCenter: selection.location, fromDistance: 200, pitch: 1, heading: 0)
+		mapView.setCamera(camera, animated: true)
+	}
+
+	func tableView(_: UITableView, didDeselectRowAt indexPath: IndexPath) {
+		guard let annotation = annotations[indexPath] else { return }
+		mapView.removeAnnotation(annotation)
+		annotations[indexPath] = nil
+	}
 }
 
 extension ListViewController: MKMapViewDelegate {}
