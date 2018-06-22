@@ -95,5 +95,5 @@ func toOptional<A>(_ f: @escaping (A) -> Bool) ->
 
 func toBool<A>(_ f: @escaping (A) -> A?) ->
 	(A) -> Bool {
-		return { a in f(a) != nil }
+	return { a in f(a) != nil }
 }
