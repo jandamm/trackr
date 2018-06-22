@@ -87,3 +87,13 @@ func toVoid<A, B>(_ f: @escaping (A) -> B) ->
 		_ = f(a)
 	}
 }
+
+func toOptional<A>(_ f: @escaping (A) -> Bool) ->
+	(A) -> A? {
+	return { a in f(a) ? a : nil }
+}
+
+func toBool<A>(_ f: @escaping (A) -> A?) ->
+	(A) -> Bool {
+		return { a in f(a) != nil }
+}
