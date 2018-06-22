@@ -6,7 +6,6 @@
 //  Copyright © 2018 Jan Dammshäuser. All rights reserved.
 //
 
-import CoreLocation
 import Overture
 import UIKit
 

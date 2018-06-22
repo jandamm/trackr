@@ -6,7 +6,6 @@
 //  Copyright © 2018 Jan Dammshäuser. All rights reserved.
 //
 
-import CoreLocation
 import Overture
 import SQLite
 
@@ -89,7 +88,7 @@ private func rowMapper(_ row: Row) -> Track {
 	let alt = row[SQLiteWrapper.alt]
 	let src = Track.Source(rawValue: row[SQLiteWrapper.src]) ?? .change
 	return Track(date: Date(timeIntervalSince1970: date),
-	             location: CLLocationCoordinate2D(latitude: lat, longitude: lon),
+	             location: Coordinate(latitude: lat, longitude: lon),
 	             altitude: alt,
 	             source: src
 	)

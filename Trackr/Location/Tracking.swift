@@ -6,16 +6,15 @@
 //  Copyright © 2018 Jan Dammshäuser. All rights reserved.
 //
 
-import CoreLocation
 import Foundation
 import Overture
 
-enum Location {
-	static let desiredAccuracy: CLLocationAccuracy = 100
+enum Tracking {
+	static let desiredAccuracy: Double = 100
 }
 
-extension Location {
-	static func updateLocations(_ locations: [CLLocation], from locationManager: LocationManager) {
+extension Tracking {
+	static func updateLocations(_ locations: [Location], from locationManager: LocationManager) {
 		guard let lastLocation = locations.last else { return }
 
 		// TODO: nicer filter for slcLocations
@@ -59,7 +58,7 @@ extension Location {
 	}
 
 	// TODO: add nicer storing and validation
-	static func updateVisit(_ visit: CLVisit, from _: LocationManager) {
+	static func updateVisit(_ visit: Visit, from _: LocationManager) {
 		let unequalTo: (Date) -> (Date) -> Bool = curry(
 			!=
 		)
@@ -77,7 +76,7 @@ extension Location {
 		)
 	}
 
-	private static func saveVisit(_ visit: CLVisit, forDate converter: (CLVisit) -> Date?) {
+	private static func saveVisit(_ visit: Visit, forDate converter: (Visit) -> Date?) {
 		guard let date = converter(visit) else { return }
 		let track = Track(date: date, location: visit.coordinate, altitude: 0, source: .visit)
 		let sameTimeTrack = try? SQLiteWrapper.getTrack(forDate: date)

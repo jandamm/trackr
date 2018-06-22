@@ -6,13 +6,12 @@
 //  Copyright © 2018 Jan Dammshäuser. All rights reserved.
 //
 
-import CoreLocation
 import Foundation
 import Overture
 
 struct Track {
 	let date: Date
-	let location: CLLocationCoordinate2D
+	let location: Coordinate
 	let altitude: Double
 	let source: Source
 }
