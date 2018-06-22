@@ -7,6 +7,7 @@
 //
 
 import CoreLocation
+import MapKit
 import Overture
 import UIKit
 
@@ -17,6 +18,7 @@ class ListViewController: UIViewController {
 	}
 
 	private var observer: NSObjectProtocol!
+	@IBOutlet private var mapView: MKMapView!
 	@IBOutlet private var tableView: UITableView!
 
 	override func viewDidLoad() {
@@ -72,3 +74,5 @@ extension ListViewController: UITableViewDataSource {
 
 extension ListViewController: UITableViewDelegate {
 }
+
+extension ListViewController: MKMapViewDelegate {}
