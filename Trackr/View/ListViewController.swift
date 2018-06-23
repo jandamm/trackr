@@ -83,6 +83,26 @@ extension ListViewController: UITableViewDataSource {
 }
 
 extension ListViewController: UITableViewDelegate {
+	func tableView(_: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+		let section = sections[indexPath.section]
+		guard var data = self.data[section] else { return nil }
+
+		let track = data[indexPath.row]
+		let action: (UITableViewRowAction, IndexPath) -> Void = { _, _ in
+			guard (try? SQLiteWrapper.remove(track)) != nil else { return }
+			data.remove(at: indexPath.row)
+			if data.isEmpty {
+				self.data[section] = nil
+				self.sections.remove(at: indexPath.section)
+			} else {
+				self.data[section] = data
+			}
+			self.tableView(self.tableView, didDeselectRowAt: indexPath)
+			self.tableView.reloadSections(IndexSet(integer: indexPath.section), with: .fade)
+		}
+		return [UITableViewRowAction(style: .destructive, title: "Delete", handler: action)]
+	}
+
 	func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let section = sections[indexPath.section]
 		let selection = data[section]![indexPath.row]
