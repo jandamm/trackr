@@ -46,22 +46,22 @@ extension Tracking {
 			!=
 		)
 
-		saveVisit(visit, forDate:
+		saveVisit(visit, source: .visitArrival, forDate:
 			pipe(^\.arrivalDate,
 			     validate(unequalTo(Date.distantPast))
 			)
 		)
 
-		saveVisit(visit, forDate:
+		saveVisit(visit, source: .visitDeparture, forDate:
 			pipe(^\.departureDate,
 			     validate(unequalTo(Date.distantFuture))
 			)
 		)
 	}
 
-	private static func saveVisit(_ visit: Visit, forDate converter: (Visit) -> Date?) {
+	private static func saveVisit(_ visit: Visit, source: Track.Source, forDate converter: (Visit) -> Date?) {
 		guard let date = converter(visit) else { return }
-		let track = Track(date: date, location: visit.coordinate, altitude: 0, source: .visit)
+		let track = Track(date: date, location: visit.coordinate, altitude: 0, source: source)
 		let sameTimeTrack = try? SQLiteWrapper.getTrack(forDate: date)
 		guard track != sameTimeTrack else {
 			return

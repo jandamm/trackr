@@ -18,7 +18,9 @@ struct Track {
 
 extension Track {
 	enum Source: String {
-		case region, visit, change
+		case regionEnter = "region", regionExit
+		case visitArrival = "visit", visitDeparture
+		case change
 	}
 }
 
