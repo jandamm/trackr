@@ -14,30 +14,13 @@ enum Tracking {
 }
 
 extension Tracking {
-	static func updateLocations(_ locations: [Location], from locationManager: LocationManager) {
-		guard let lastLocation = locations.last else { return }
-
-		// TODO: nicer filter for slcLocations
-		if let slcLocation = lastLocation.speed == -1 ? lastLocation : nil {
-			guard slcLocation.timestamp != Defaults.getLastSLCDate() else { return }
-
-			// only save if older than 10 seconds.
-			// still not perfect as this also triggers twice per SLC location.
-			if slcLocation.timestamp.timeIntervalSinceNow < -10 {
-				Defaults.setLastSLCDate(slcLocation.timestamp)
-			}
-		}
-
-		let validLocations = locations.filter { $0.horizontalAccuracy <= desiredAccuracy }
-		guard !validLocations.isEmpty else {
-			locationManager.requestLocation()
-			return
-		}
+	static func updateLocations(_ locations: [Location], from _: LocationManager) {
+		guard !locations.isEmpty else { return }
 
 		let lastTrack = try? SQLiteWrapper.getLastTrack()
 
 		var hasUpdates = false
-		validLocations.forEach { location in
+		locations.forEach { location in
 			let track = Track(date: location.timestamp, location: location.coordinate, altitude: location.altitude, source: .change)
 			guard !optional(isEqualLocation)(track, lastTrack) &&
 				!optional(equal(^\Track.date))(track, lastTrack) else {

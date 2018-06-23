@@ -9,7 +9,7 @@
 import Foundation
 
 enum Defaults {
-	case errors, tracks, lastSLC
+	case errors, tracks
 }
 
 extension Defaults {
@@ -21,8 +21,6 @@ extension Defaults {
 			return (UserDefaults.standard, "errors")
 		case .tracks:
 			return (UserDefaults.standard, "tracks")
-		case .lastSLC:
-			return (UserDefaults.standard, "slc")
 		}
 	}
 }
@@ -32,9 +30,6 @@ extension Defaults {
 extension Defaults {
 	static let getTracks: () -> [Track] = getValues(from: Defaults.tracks.store)
 	static let getErrors: () -> [Error] = getValues(from: Defaults.errors.store)
-
-	static let getLastSLCDate: () -> Date? = getValue(from: Defaults.lastSLC.store)
-	static let setLastSLCDate: (Date) -> Void = setValue(in: Defaults.lastSLC.store)
 
 	static let appendTrack: (Track) -> Void = appendValue(in: Defaults.tracks.store)
 	static let appendError: (Error) -> Void = appendValue(in: Defaults.errors.store)
