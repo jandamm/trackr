@@ -97,3 +97,8 @@ func toBool<A>(_ f: @escaping (A) -> A?) ->
 	(A) -> Bool {
 	return { a in f(a) != nil }
 }
+
+func isA<T, A>(_: T.Type) ->
+	(A) -> Bool {
+	return { $0 is T }
+}

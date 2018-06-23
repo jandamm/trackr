@@ -15,3 +15,8 @@ prefix func ^ <Root, Value>(rhs: KeyPath<Root, Value>) ->
 	(Root) -> Value {
 	return get(rhs)
 }
+
+prefix func ! <A>(f: @escaping (A) -> Bool) ->
+	(A) -> Bool {
+	return { a in !f(a) }
+}
