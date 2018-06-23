@@ -105,9 +105,12 @@ extension ListViewController: UITableViewDelegate {
 	}
 
 	private func setCamera() {
-		let annotations = mapView.annotations
+		let annotations = mapView.annotations.filter(!isA(MKUserLocation.self))
 
-		guard !annotations.isEmpty else { return }
+		guard !annotations.isEmpty else {
+			setRegion(to: mapView?.userLocation.coordinate)
+			return
+		}
 
 		var minLat: Double = 90
 		var minLon: Double = 180
@@ -126,6 +129,12 @@ extension ListViewController: UITableViewDelegate {
 		let deltaLon = maxLon - minLon
 
 		let center = Coordinate(latitude: minLat + deltaLat / 2, longitude: minLon + deltaLon / 2)
+		setRegion(to: center, deltaLat: deltaLat, deltaLon: deltaLon)
+	}
+
+	private func setRegion(to center: Coordinate?, deltaLat: Double = 0.1, deltaLon: Double = 0.1) {
+		guard let center = center else { return }
+
 		let span = MKCoordinateSpan(latitudeDelta: deltaLat * 1.3, longitudeDelta: deltaLon * 1.3)
 		let region = MKCoordinateRegion(center: center, span: span)
 
