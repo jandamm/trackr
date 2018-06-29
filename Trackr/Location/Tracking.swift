@@ -23,7 +23,8 @@ extension Tracking {
 		locations.forEach { location in
 			let track = Track(date: location.timestamp, location: location.coordinate, altitude: location.altitude, source: .change)
 			guard !optional(isEqualLocation)(track, lastTrack) &&
-				!optional(equal(^\Track.date))(track, lastTrack) else {
+				!optional(equal(^\Track.date))(track, lastTrack) &&
+				(try? SQLiteWrapper.getTrack(forDate: location.timestamp)) == nil else {
 				return
 			}
 
@@ -62,8 +63,7 @@ extension Tracking {
 	private static func saveVisit(_ visit: Visit, source: Track.Source, forDate converter: (Visit) -> Date?) {
 		guard let date = converter(visit) else { return }
 		let track = Track(date: date, location: visit.coordinate, altitude: 0, source: source)
-		let sameTimeTrack = try? SQLiteWrapper.getTrack(forDate: date)
-		guard track != sameTimeTrack else {
+		guard (try? SQLiteWrapper.getTrack(forDate: date)) == nil else {
 			return
 		}
 		save(track: track)
@@ -80,7 +80,8 @@ extension Tracking {
 			try SQLiteWrapper.add(track)
 			return true
 		} catch {
-			Defaults.appendTrack(track)
+			#warning("need to fix saving to Defaults")
+//			Defaults.appendTrack(track)
 			handleError(error)
 			return false
 		}
